@@ -1,4 +1,4 @@
-# delphi
+# delphi-node-sdk
 
 A NodeJS SDK for the Delphi API
 
