@@ -21,7 +21,9 @@
     "sandboxed",
     "transpiled",
     "typedoc",
-    "untracked"
+    "untracked",
+    "Lightdash",
+    "lightdash"
   ],
   "flagWords": [],
   "ignorePaths": [
