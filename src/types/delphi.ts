@@ -1,3 +1,5 @@
+import { LightdashQuery } from './lightdash';
+
 export type LightdashField = {
   name: string;
   description: string;
@@ -32,11 +34,7 @@ export interface GetAnswerRequest {
 }
 
 export interface LightdashQueryResponse {
-  lightdashQuery: {
-    dimensions: Omit<LightdashField, 'description'>[];
-    metrics: Omit<LightdashField, 'description'>[];
-    sort?: Omit<LightdashField, 'description'>;
-  };
+  lightdashQuery: LightdashQuery;
 }
 
 export interface DbtMetricsQueryResponse {
