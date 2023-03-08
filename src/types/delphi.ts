@@ -1,3 +1,4 @@
+import { DbtQuery } from './dbt';
 import { LightdashQuery } from './lightdash';
 
 export type LightdashField = {
@@ -39,6 +40,15 @@ export interface LightdashQueryResponse {
 
 export interface DbtMetricsQueryResponse {
   dbtMetricsQuery: string;
+  dbtMetricObject: DbtQuery;
+}
+
+export interface SummarizeQueryRequest {
+  query: LightdashQuery | DbtQuery;
+}
+
+export interface SummarizeQueryResponse {
+  summary: string;
 }
 
 export interface GetAnswerResponse {

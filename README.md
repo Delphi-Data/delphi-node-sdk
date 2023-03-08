@@ -32,6 +32,10 @@ const { lightdashQuery } = await delphi.generateLightdashQuery({
   context,
 })
 
+const { summary } = await delphi.summarizeQuery({
+  query
+})
+
 const { answer } = await this.delphi.answerFromData({
   question,
   data,

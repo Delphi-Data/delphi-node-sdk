@@ -9,6 +9,8 @@ import type {
   GetAnswerResponse,
   LightdashQueryRequest,
   LightdashQueryResponse,
+  SummarizeQueryRequest,
+  SummarizeQueryResponse,
 } from '../types/delphi';
 
 export class DelphiError extends Error {
@@ -59,6 +61,16 @@ export class DelphiApi {
     >('/lightdash-query', request);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as LightdashQueryResponse;
+  }
+
+  async summarizeQuery(
+    request: SummarizeQueryRequest
+  ): Promise<SummarizeQueryResponse> {
+    const response = await this.client.post<
+      SummarizeQueryResponse | ErrorResponse
+    >('/query-summary', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as SummarizeQueryResponse;
   }
 
   async answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse> {
