@@ -17,7 +17,7 @@ const delphi = new DelphiApi({
   apiKey: params.apiKey,
 })
 
-const { dbtMetricsQuery } = await delphi.generateDbtMetricsQuery({
+const { dbtMetricsQuery, dbtMetricsObject } = await delphi.generateDbtMetricsQuery({
   question,
   jobId,
   metrics,

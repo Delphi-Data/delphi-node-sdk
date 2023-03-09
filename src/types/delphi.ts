@@ -49,7 +49,7 @@ export interface RefineQueryRequest<T extends LightdashQuery | DbtQuery> {
 }
 
 export interface RefineQueryResponse<T extends LightdashQuery | DbtQuery> {
-  query: T;
+  query: T extends DbtQuery ? DbtMetricsQueryResponse : LightdashQuery;
 }
 
 export interface SummarizeQueryRequest {
