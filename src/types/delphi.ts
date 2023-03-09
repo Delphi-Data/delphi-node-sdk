@@ -43,6 +43,15 @@ export interface DbtMetricsQueryResponse {
   dbtMetricObject: DbtQuery;
 }
 
+export interface RefineQueryRequest<T extends LightdashQuery | DbtQuery> {
+  query: T;
+  message: string;
+}
+
+export interface RefineQueryResponse<T extends LightdashQuery | DbtQuery> {
+  query: T;
+}
+
 export interface SummarizeQueryRequest {
   query: LightdashQuery | DbtQuery;
 }

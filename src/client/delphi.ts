@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
+import { DbtQuery } from '../types/dbt';
 import type {
   DbtMetricsQueryRequest,
   DbtMetricsQueryResponse,
@@ -9,9 +10,12 @@ import type {
   GetAnswerResponse,
   LightdashQueryRequest,
   LightdashQueryResponse,
+  RefineQueryRequest,
+  RefineQueryResponse,
   SummarizeQueryRequest,
   SummarizeQueryResponse,
 } from '../types/delphi';
+import { LightdashQuery } from '../types/lightdash';
 
 export class DelphiError extends Error {
   type = 'DelphiError';
@@ -71,6 +75,16 @@ export class DelphiApi {
     >('/query-summary', request);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as SummarizeQueryResponse;
+  }
+
+  async refineQuery<T extends LightdashQuery | DbtQuery>(
+    request: RefineQueryRequest<T>
+  ): Promise<RefineQueryResponse<T>> {
+    const response = await this.client.post<
+      RefineQueryResponse<T> | ErrorResponse
+    >('/refine-query', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as RefineQueryResponse<T>;
   }
 
   async answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse> {

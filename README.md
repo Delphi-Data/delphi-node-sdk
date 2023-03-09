@@ -36,6 +36,11 @@ const { summary } = await delphi.summarizeQuery({
   query
 })
 
+const { query } = await delphi.refineQuery({
+  query,
+  message: "The limit should not exist"
+})
+
 const { answer } = await this.delphi.answerFromData({
   question,
   data,
