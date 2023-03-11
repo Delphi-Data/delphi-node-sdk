@@ -5,6 +5,7 @@ import { DbtQuery } from '../types/dbt';
 import type {
   DbtMetricsQueryRequest,
   DbtMetricsQueryResponse,
+  Document,
   ErrorResponse,
   GetAnswerRequest,
   GetAnswerResponse,
@@ -12,6 +13,8 @@ import type {
   LightdashQueryResponse,
   RefineQueryRequest,
   RefineQueryResponse,
+  SearchEntitiesRequest,
+  SearchEntitiesResponse,
   SummarizeQueryRequest,
   SummarizeQueryResponse,
 } from '../types/delphi';
@@ -94,5 +97,15 @@ export class DelphiApi {
     );
     this.handleError((response.data as ErrorResponse).error);
     return response.data as GetAnswerResponse;
+  }
+
+  async searchEntities<T extends Document>(
+    request: SearchEntitiesRequest<T>
+  ): Promise<SearchEntitiesResponse<T>> {
+    const response = await this.client.post<
+      SearchEntitiesResponse<T> | ErrorResponse
+    >('/search-entities', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as SearchEntitiesResponse<T>;
   }
 }

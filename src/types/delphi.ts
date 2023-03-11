@@ -64,6 +64,19 @@ export interface GetAnswerResponse {
   answer: string;
 }
 
+export type Document = {
+  name: string;
+};
+
+export type SearchEntitiesRequest<T extends Document> = {
+  question: string;
+  entities: T[];
+};
+
+export type SearchEntitiesResponse<T extends Document> = {
+  relevantEntities: T[];
+};
+
 export type ErrorResponse = {
   error: string;
 };
