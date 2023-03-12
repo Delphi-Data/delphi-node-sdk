@@ -32,6 +32,7 @@ export interface GetAnswerRequest {
   question: string;
   data: QueryResult;
   context?: string[];
+  query?: string | LightdashQuery;
 }
 
 export interface LightdashQueryResponse {
