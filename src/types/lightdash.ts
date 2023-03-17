@@ -75,3 +75,5 @@ export type LightdashQuery = {
   limit: number; // Max number of rows to return from query
   tableCalculations: TableCalculation[]; // calculations to append to results
 };
+
+export type LightdashDbtMetric = Record<string, string | string[]>;
