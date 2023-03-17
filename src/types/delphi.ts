@@ -15,8 +15,8 @@ export type QueryResult = Record<
 
 export interface DbtMetricsQueryRequest {
   question: string;
-  jobId: string;
-  serviceToken: string;
+  jobId?: string;
+  serviceToken?: string;
   metrics?: Record<string, string | string[]>[];
   context?: string[];
 }
