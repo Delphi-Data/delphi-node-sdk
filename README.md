@@ -32,6 +32,13 @@ const { lightdashQuery } = await delphi.generateLightdashQuery({
   context,
 })
 
+const { metabaseQuery } = await delphi.generateMetabaseQuery({
+  question,
+  dimensions,
+  metrics,
+  context,
+})
+
 const { summary } = await delphi.summarizeQuery({
   query
 })

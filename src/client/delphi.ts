@@ -11,6 +11,8 @@ import type {
   GetAnswerResponse,
   LightdashQueryRequest,
   LightdashQueryResponse,
+  MetabaseQueryRequest,
+  MetabaseQueryResponse,
   RefineQueryRequest,
   RefineQueryResponse,
   SearchEntitiesRequest,
@@ -70,6 +72,15 @@ export class DelphiApi {
     return response.data as LightdashQueryResponse;
   }
 
+  async generateMetabaseQuery(
+    request: MetabaseQueryRequest
+  ): Promise<MetabaseQueryResponse> {
+    const response = await this.client.post<
+      MetabaseQueryResponse | ErrorResponse
+    >('/metabase-query', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as MetabaseQueryResponse;
+  }
   async summarizeQuery(
     request: SummarizeQueryRequest
   ): Promise<SummarizeQueryResponse> {

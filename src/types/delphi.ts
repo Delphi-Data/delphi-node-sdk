@@ -1,6 +1,6 @@
 import { DbtMetric, DbtQuery } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
-import { MetabaseMetric } from './metabase';
+import { MetabaseMetric, MetabaseQuery } from './metabase';
 
 export type LightdashField = {
   name: string;
@@ -45,6 +45,17 @@ export interface DbtMetricsQueryResponse {
   dbtMetricsQuery: string;
   dbtMetricObject: DbtQuery;
 }
+
+export type MetabaseQueryRequest = {
+  question: string;
+  dimensions: MetabaseMetric[];
+  metrics: MetabaseMetric[];
+  context?: string[];
+};
+
+export type MetabaseQueryResponse = {
+  metabaseQuery: MetabaseQuery;
+};
 
 export interface RefineQueryRequest<T extends LightdashQuery | DbtQuery> {
   query: T;
