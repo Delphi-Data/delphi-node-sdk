@@ -57,7 +57,9 @@ export type MetabaseQueryResponse = {
   metabaseQuery: MetabaseQuery;
 };
 
-export interface RefineQueryRequest<T extends LightdashQuery | DbtQuery> {
+export interface RefineQueryRequest<
+  T extends LightdashQuery | DbtQuery | MetabaseQuery
+> {
   query: T;
   message: string;
   originalQuestion: string;
@@ -69,12 +71,18 @@ export interface RefineQueryRequest<T extends LightdashQuery | DbtQuery> {
     | MetabaseMetric[];
 }
 
-export interface RefineQueryResponse<T extends LightdashQuery | DbtQuery> {
-  query: T extends DbtQuery ? DbtMetricsQueryResponse : LightdashQuery;
+export interface RefineQueryResponse<
+  T extends LightdashQuery | DbtQuery | MetabaseQuery
+> {
+  query: T extends DbtQuery
+    ? DbtMetricsQueryResponse
+    : T extends LightdashQuery
+    ? LightdashQuery
+    : MetabaseQuery;
 }
 
 export interface SummarizeQueryRequest {
-  query: LightdashQuery | DbtQuery;
+  query: LightdashQuery | DbtQuery | MetabaseQuery;
 }
 
 export interface SummarizeQueryResponse {

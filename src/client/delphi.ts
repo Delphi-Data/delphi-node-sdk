@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
+import { MetabaseQuery } from '../types';
 import { DbtQuery } from '../types/dbt';
 import type {
   DbtMetricsQueryRequest,
@@ -81,6 +82,7 @@ export class DelphiApi {
     this.handleError((response.data as ErrorResponse).error);
     return response.data as MetabaseQueryResponse;
   }
+
   async summarizeQuery(
     request: SummarizeQueryRequest
   ): Promise<SummarizeQueryResponse> {
@@ -91,7 +93,7 @@ export class DelphiApi {
     return response.data as SummarizeQueryResponse;
   }
 
-  async refineQuery<T extends LightdashQuery | DbtQuery>(
+  async refineQuery<T extends LightdashQuery | DbtQuery | MetabaseQuery>(
     request: RefineQueryRequest<T>
   ): Promise<RefineQueryResponse<T>> {
     const response = await this.client.post<
