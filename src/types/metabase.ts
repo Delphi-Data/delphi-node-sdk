@@ -4,7 +4,15 @@ export type MetabaseMetric = {
   id: string;
 };
 
-type Field = ['field', number]; // the field ID
+type TemporalUnit =
+  | 'minute'
+  | 'hour'
+  | 'day'
+  | 'week'
+  | 'month'
+  | 'quarter'
+  | 'year';
+type Field = ['field', number, null | { 'temporal-unit': TemporalUnit }]; // the field ID
 type Metric = ['metric', number]; // the metric ID
 
 type AggregationType =
@@ -40,16 +48,16 @@ type FilterType =
   | 'time-interval';
 type FilterClause =
   | [FilterType, Field, number | boolean | string | null]
-  | ['and' | 'or', FilterClause];
+  | ['and' | 'or', ...FilterClause[]];
 
 export type MetabaseQuery = {
   type: 'query';
   query: {
     'source-table': number;
-    fields: Field[];
-    aggregation: AggregationClause[];
-    breakout: Field[];
-    filter: FilterClause[];
+    fields?: Field[];
+    aggregation?: AggregationClause[];
+    breakout?: Field[];
+    filter?: FilterClause;
     limit?: number;
   };
   database: number;
