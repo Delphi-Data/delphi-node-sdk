@@ -4,59 +4,75 @@ export type MetabaseMetric = {
   id: string;
 };
 
-type TemporalUnit =
-  | 'minute'
+type AggregationClause =
+  | ['avg', ConcreteField]
+  | ['count']
+  | ['count', ConcreteField]
+  | ['count-where', FilterClause]
+  | ['cum-count', ConcreteField]
+  | ['cum-sum', ConcreteField]
+  | ['distinct', ConcreteField]
+  | ['stddev', ConcreteField]
+  | ['sum', ConcreteField]
+  | ['sum-where', ConcreteField, FilterClause]
+  | ['min', ConcreteField]
+  | ['max', ConcreteField]
+  | ['share', FilterClause];
+
+type FilterClause =
+  | ['and', ...FilterClause[]]
+  | ['or', ...FilterClause[]]
+  | ['not', FilterClause]
+  | ['=', ConcreteField, ...Value[]]
+  | ['!=', ConcreteField, ...Value[]]
+  | ['<', ConcreteField, OrderableValue]
+  | ['>', ConcreteField, OrderableValue]
+  | ['<=', ConcreteField, OrderableValue]
+  | ['>=', ConcreteField, OrderableValue]
+  | ['is-null', ConcreteField]
+  | ['not-null', ConcreteField]
+  | ['between', ConcreteField, OrderableValue, OrderableValue]
+  | [
+      'inside',
+      LatConcreteField,
+      LonConcreteField,
+      number,
+      number,
+      number,
+      number
+    ]
+  | ['starts-with', ConcreteField, string]
+  | ['contains', ConcreteField, string]
+  | ['does-not-contain', ConcreteField, string]
+  | ['ends-with', ConcreteField, string]
+  | [
+      'time-interval',
+      ConcreteField,
+      number | 'current' | 'last' | 'next',
+      RelativeDatetimeUnit
+    ];
+
+type ConcreteField = ['field-id', number];
+type Value = string | number | boolean;
+type OrderableValue = string | number;
+type LatConcreteField = string;
+type LonConcreteField = string;
+type RelativeDatetimeUnit =
   | 'hour'
   | 'day'
+  | 'minute'
   | 'week'
   | 'month'
   | 'quarter'
   | 'year';
-type Field = ['field', number, null | { 'temporal-unit': TemporalUnit }]; // the field ID
-type Metric = ['metric', number]; // the metric ID
-
-type AggregationType =
-  | 'avg'
-  | 'count'
-  | 'count-where'
-  | 'cum-count'
-  | 'cum-sum'
-  | 'distinct'
-  | 'stddev'
-  | 'sum'
-  | 'sum-where'
-  | 'min'
-  | 'max';
-type AggregationClause = [AggregationType, Field] | Metric;
-
-type FilterType =
-  | 'not'
-  | '='
-  | '!='
-  | '<'
-  | '>'
-  | '<='
-  | '>='
-  | 'is-null'
-  | 'not-null'
-  | 'between'
-  | 'inside'
-  | 'starts-with'
-  | 'contains'
-  | 'does-not-contain'
-  | 'ends-with'
-  | 'time-interval';
-type FilterClause =
-  | [FilterType, Field, number | boolean | string | null]
-  | ['and' | 'or', ...FilterClause[]];
 
 export type MetabaseQuery = {
   type: 'query';
   query: {
     'source-table': number;
-    fields?: Field[];
+    fields?: ConcreteField[];
     aggregation?: AggregationClause[];
-    breakout?: Field[];
+    breakout?: ConcreteField[];
     filter?: FilterClause;
     limit?: number;
   };
