@@ -1,7 +1,7 @@
-export type MetabaseMetric = {
+export type MetabaseField = {
   name: string;
-  description: string;
-  id: string;
+  description: string | null;
+  id: number;
 };
 
 type AggregationClause =
