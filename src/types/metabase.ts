@@ -2,6 +2,7 @@ export type MetabaseField = {
   name: string;
   description: string | null;
   id: number;
+  table_id: number;
 };
 
 type AggregationClause =
