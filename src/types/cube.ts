@@ -111,19 +111,24 @@ export type CubeDimension = {
   name: string;
   title: string;
   type: string;
-  aliasName: string;
   shortTitle: string;
+  isVisible?: boolean;
 };
 
 export type CubeMeasure = CubeDimension & {
-  aggType: string;
-  drill_members: string[];
+  aggType: 'count' | 'number';
+  cumulative: boolean;
+  cumulativeTotal: boolean;
+  drillMembers: string[];
+  drillMembersGrouped: {
+    measures: string[];
+    dimensions: string[];
+  };
 };
 
 export type CubeCube = {
   name: string;
   title: string;
-  connectedComponent: number;
   measures: CubeMeasure[];
   dimensions: CubeDimension[];
 };

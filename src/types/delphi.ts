@@ -1,4 +1,4 @@
-import { CubeCube, CubeDimension, CubeMeasure, CubeQuery } from './cube';
+import { CubeCube, CubeQuery } from './cube';
 import { DbtMetric, DbtQuery } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { MetabaseField, MetabaseQuery } from './metabase';
@@ -68,19 +68,23 @@ export type CubeQueryResponse = {
   cubeQuery: CubeQuery;
 };
 
-export type Query = LightdashQuery | DbtQuery | MetabaseQuery | CubeQuery;
+export type Query =
+  | LightdashQuery
+  | DbtMetricsQueryResponse
+  | MetabaseQuery
+  | CubeQuery;
 
 export interface RefineQueryRequest<T extends Query> {
   query: T;
   message: string;
   originalQuestion: string;
-  dimensions: LightdashField[] | MetabaseField[] | CubeDimension[] | [];
-  metrics:
+  dimensions?: LightdashField[] | MetabaseField[] | [];
+  metrics?:
     | LightdashField[]
     | DbtMetric[]
     | LightdashDbtMetric[]
-    | MetabaseField[]
-    | CubeMeasure[];
+    | MetabaseField[];
+  cubes?: CubeCube[];
 }
 
 export interface RefineQueryResponse<T extends Query> {
@@ -88,6 +92,8 @@ export interface RefineQueryResponse<T extends Query> {
     ? DbtMetricsQueryResponse
     : T extends LightdashQuery
     ? LightdashQuery
+    : T extends CubeQuery
+    ? CubeQuery
     : MetabaseQuery;
 }
 

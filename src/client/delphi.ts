@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
-import { MetabaseQuery } from '../types';
-import { DbtQuery } from '../types/dbt';
 import type {
+  CubeQueryRequest,
+  CubeQueryResponse,
   DbtMetricsQueryRequest,
   DbtMetricsQueryResponse,
   Document,
@@ -14,6 +14,7 @@ import type {
   LightdashQueryResponse,
   MetabaseQueryRequest,
   MetabaseQueryResponse,
+  Query,
   RefineQueryRequest,
   RefineQueryResponse,
   SearchEntitiesRequest,
@@ -21,7 +22,6 @@ import type {
   SummarizeQueryRequest,
   SummarizeQueryResponse,
 } from '../types/delphi';
-import { LightdashQuery } from '../types/lightdash';
 
 export class DelphiError extends Error {
   type = 'DelphiError';
@@ -83,6 +83,17 @@ export class DelphiApi {
     return response.data as MetabaseQueryResponse;
   }
 
+  async generateCubeQuery(
+    request: CubeQueryRequest
+  ): Promise<CubeQueryResponse> {
+    const response = await this.client.post<CubeQueryResponse | ErrorResponse>(
+      '/cube-query',
+      request
+    );
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as CubeQueryResponse;
+  }
+
   async summarizeQuery(
     request: SummarizeQueryRequest
   ): Promise<SummarizeQueryResponse> {
@@ -93,7 +104,7 @@ export class DelphiApi {
     return response.data as SummarizeQueryResponse;
   }
 
-  async refineQuery<T extends LightdashQuery | DbtQuery | MetabaseQuery>(
+  async refineQuery<T extends Query>(
     request: RefineQueryRequest<T>
   ): Promise<RefineQueryResponse<T>> {
     const response = await this.client.post<
