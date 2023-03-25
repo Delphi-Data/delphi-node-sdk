@@ -99,6 +99,7 @@ export interface RefineQueryResponse<T extends Query> {
 
 export interface SummarizeQueryRequest {
   query: Query;
+  question?: string;
 }
 
 export interface SummarizeQueryResponse {
