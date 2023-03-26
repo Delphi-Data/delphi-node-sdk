@@ -3,6 +3,13 @@ import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { MetabaseField, MetabaseQuery } from './metabase';
 
+export type DataServiceType =
+  | 'mock'
+  | 'dbt_cloud'
+  | 'lightdash'
+  | 'metabase'
+  | 'cubejs';
+
 export type LightdashField = {
   name: string;
   label?: string;
@@ -77,6 +84,8 @@ export interface RefineQueryRequest<T extends Query> {
     | LightdashDbtMetric[]
     | MetabaseField[];
   cubes?: CubeCube[];
+  includeSummary?: boolean;
+  type?: DataServiceType;
 }
 
 export interface RefineQueryResponse<T extends Query> {
