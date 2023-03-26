@@ -15,3 +15,8 @@ export type DbtMetric = {
   timeGrains: string[];
   label: string;
 };
+
+export type DbtQueryWithSQL = {
+  dbtMetricsQuery: string;
+  dbtMetricObject: DbtQuery;
+};

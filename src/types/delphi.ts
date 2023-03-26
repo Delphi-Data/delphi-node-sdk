@@ -1,12 +1,12 @@
 import { CubeCube, CubeQuery } from './cube';
-import { DbtMetric, DbtQuery } from './dbt';
+import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { MetabaseField, MetabaseQuery } from './metabase';
 
 export type LightdashField = {
   name: string;
   label?: string;
-  description: string;
+  description?: string;
   explore: string;
   table: string;
 };
@@ -16,19 +16,21 @@ export type QueryResult = Record<
   string | number | Date | boolean | JSON
 >[];
 
-export interface DbtMetricsQueryRequest {
+type QueryRequest = {
   question: string;
+  context?: string[];
+  includeSummary?: boolean;
+};
+
+export interface DbtMetricsQueryRequest extends QueryRequest {
   jobId?: string;
   serviceToken?: string;
   metrics?: Record<string, string | string[]>[];
-  context?: string[];
 }
 
-export interface LightdashQueryRequest {
-  question: string;
+export interface LightdashQueryRequest extends QueryRequest {
   dimensions: LightdashField[];
   metrics: LightdashField[];
-  context?: string[];
 }
 
 export interface GetAnswerRequest {
@@ -38,41 +40,31 @@ export interface GetAnswerRequest {
   query?: string | LightdashQuery;
 }
 
-export interface LightdashQueryResponse {
-  lightdashQuery: LightdashQuery;
-}
-
-export interface DbtMetricsQueryResponse {
-  dbtMetricsQuery: string;
-  dbtMetricObject: DbtQuery;
-}
-
-export type MetabaseQueryRequest = {
-  question: string;
-  dimensions: MetabaseField[];
-  metrics: MetabaseField[];
-  context?: string[];
-};
-
-export type MetabaseQueryResponse = {
-  metabaseQuery: MetabaseQuery;
-};
-
-export type CubeQueryRequest = {
-  question: string;
-  cubes: CubeCube[];
-  context?: string[];
-};
-
-export type CubeQueryResponse = {
-  cubeQuery: CubeQuery;
-};
-
 export type Query =
   | LightdashQuery
-  | DbtMetricsQueryResponse
+  | DbtQueryWithSQL
   | MetabaseQuery
   | CubeQuery;
+
+export type QueryResponse<T extends Query> = {
+  query: T;
+  summary?: string;
+};
+
+export type LightdashQueryResponse = QueryResponse<LightdashQuery>;
+
+export type DbtMetricsQueryResponse = QueryResponse<DbtQueryWithSQL>;
+
+export interface MetabaseQueryRequest extends QueryRequest {
+  dimensions: MetabaseField[];
+  metrics: MetabaseField[];
+}
+export type MetabaseQueryResponse = QueryResponse<MetabaseQuery>;
+
+export interface CubeQueryRequest extends QueryRequest {
+  cubes: CubeCube[];
+}
+export type CubeQueryResponse = QueryResponse<CubeQuery>;
 
 export interface RefineQueryRequest<T extends Query> {
   query: T;
