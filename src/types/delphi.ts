@@ -48,7 +48,7 @@ export interface LightdashQueryRequest extends QueryRequest {
 export interface GetAnswerRequest {
   question: string;
   data: QueryResult;
-  context?: string[];
+  conversation?: Conversation[];
   query?: string | LightdashQuery;
 }
 
