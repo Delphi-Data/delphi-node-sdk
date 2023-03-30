@@ -23,9 +23,14 @@ export type QueryResult = Record<
   string | number | Date | boolean | JSON
 >[];
 
+export type Conversation = {
+  text: string;
+  author: 'delphi' | 'user';
+};
+
 type QueryRequest = {
   question: string;
-  context?: string[];
+  conversation?: Conversation[];
   includeSummary?: boolean;
 };
 
@@ -86,6 +91,7 @@ export interface RefineQueryRequest<T extends Query> {
   cubes?: CubeCube[];
   includeSummary?: boolean;
   type?: DataServiceType;
+  conversation?: Conversation[];
 }
 
 export interface RefineQueryResponse<T extends Query> {
