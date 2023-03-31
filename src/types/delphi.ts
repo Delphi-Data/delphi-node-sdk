@@ -100,12 +100,13 @@ export interface RefineQueryRequest<T extends Query> {
   query: T;
   message: string;
   originalQuestion: string;
-  dimensions?: LightdashField[] | MetabaseField[] | [];
+  dimensions?: LightdashField[] | MetabaseField[] | LookerField[] | [];
   metrics?:
     | LightdashField[]
     | DbtMetric[]
     | LightdashDbtMetric[]
-    | MetabaseField[];
+    | MetabaseField[]
+    | LookerField[];
   cubes?: CubeCube[];
   includeSummary?: boolean;
   type?: DataServiceType;
