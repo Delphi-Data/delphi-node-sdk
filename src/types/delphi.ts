@@ -1,14 +1,26 @@
-import { CubeCube, CubeQuery } from './cube';
+import { CubeCube, CubeDimension, CubeQuery } from './cube';
 import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
+import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
 
 export type DataServiceType =
   | 'mock'
   | 'dbt_cloud'
   | 'lightdash'
+  | 'looker'
   | 'metabase'
   | 'cubejs';
+
+export type Catalog =
+  | LightdashField[]
+  | DbtMetric[]
+  | LightdashDbtMetric[]
+  | MetabaseField[]
+  | CubeDimension[]
+  | LookerField[];
+
+export type CatalogItem = Catalog[0];
 
 export type LightdashField = {
   name: string;
@@ -45,6 +57,11 @@ export interface LightdashQueryRequest extends QueryRequest {
   metrics: LightdashField[];
 }
 
+export interface LookerQueryRequest extends QueryRequest {
+  dimensions: LookerField[];
+  metrics: LookerField[];
+}
+
 export interface GetAnswerRequest {
   question: string;
   data: QueryResult;
@@ -56,7 +73,8 @@ export type Query =
   | LightdashQuery
   | DbtQueryWithSQL
   | MetabaseQuery
-  | CubeQuery;
+  | CubeQuery
+  | LookerQuery;
 
 export type QueryResponse<T extends Query> = {
   query: T;

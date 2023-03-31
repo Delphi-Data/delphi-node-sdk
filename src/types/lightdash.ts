@@ -1,3 +1,5 @@
+export type LookerDbtMetrics = Record<string, string | string[]>;
+
 enum FilterOperator {
   NULL = 'isNull',
   NOT_NULL = 'notNull',
