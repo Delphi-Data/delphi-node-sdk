@@ -12,6 +12,8 @@ import type {
   GetAnswerResponse,
   LightdashQueryRequest,
   LightdashQueryResponse,
+  LookerQueryRequest,
+  LookerQueryResponse,
   MetabaseQueryRequest,
   MetabaseQueryResponse,
   Query,
@@ -71,6 +73,16 @@ export class DelphiApi {
     >('/lightdash-query', request);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as LightdashQueryResponse;
+  }
+
+  async generateLookerQuery(
+    request: LookerQueryRequest
+  ): Promise<LookerQueryResponse> {
+    const response = await this.client.post<
+      LookerQueryResponse | ErrorResponse
+    >('/looker-query', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as LookerQueryResponse;
   }
 
   async generateMetabaseQuery(

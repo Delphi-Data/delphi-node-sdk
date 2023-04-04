@@ -82,8 +82,8 @@ export type QueryResponse<T extends Query> = {
 };
 
 export type LightdashQueryResponse = QueryResponse<LightdashQuery>;
-
 export type DbtMetricsQueryResponse = QueryResponse<DbtQueryWithSQL>;
+export type LookerQueryResponse = QueryResponse<LookerQuery>;
 
 export interface MetabaseQueryRequest extends QueryRequest {
   dimensions: MetabaseField[];
