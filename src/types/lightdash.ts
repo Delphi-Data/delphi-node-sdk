@@ -70,12 +70,14 @@ type TableCalculation = {
 // Object used to query an explore. Queries only happen within a single explore
 export type LightdashQuery = {
   explore: string;
-  dimensions: string[]; // Dimensions to group by in the explore
-  metrics: string[]; // Metrics to compute in the explore
-  filters: Filters;
-  sorts: SortField[]; // Sorts for the data
-  limit: number; // Max number of rows to return from query
-  tableCalculations: TableCalculation[]; // calculations to append to results
+  query: {
+    dimensions: string[]; // Dimensions to group by in the explore
+    metrics: string[]; // Metrics to compute in the explore
+    filters: Filters;
+    sorts: SortField[]; // Sorts for the data
+    limit: number; // Max number of rows to return from query
+    tableCalculations: TableCalculation[]; // calculations to append to results
+  };
 };
 
 export type LightdashDbtMetric = Record<string, string | string[]>;
