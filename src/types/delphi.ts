@@ -149,6 +149,15 @@ export type SearchEntitiesResponse<T extends Document> = {
   relevantEntities: T[];
 };
 
+export type GetValidatedQueryRequest = {
+  question: string;
+  type: DataServiceType;
+};
+
+export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
+  query: Query;
+};
+
 export type ErrorResponse = {
   error: string;
 };

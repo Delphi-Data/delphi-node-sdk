@@ -16,6 +16,7 @@ import type {
   LookerQueryResponse,
   MetabaseQueryRequest,
   MetabaseQueryResponse,
+  PostValidatedQueryRequest,
   Query,
   RefineQueryRequest,
   RefineQueryResponse,
@@ -143,5 +144,13 @@ export class DelphiApi {
     >('/search-entities', request);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as SearchEntitiesResponse<T>;
+  }
+
+  async postValidatedQuery(request: PostValidatedQueryRequest): Promise<void> {
+    const response = await this.client.post<void | ErrorResponse>(
+      '/validated-query',
+      request
+    );
+    this.handleError((response.data as ErrorResponse).error);
   }
 }
