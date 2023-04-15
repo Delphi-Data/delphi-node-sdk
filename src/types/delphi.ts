@@ -152,6 +152,13 @@ export type SearchEntitiesResponse<T extends Document> = {
 export type GetValidatedQueryRequest = {
   question: string;
   type: DataServiceType;
+  includeSummary?: boolean;
+};
+
+export type GetValidatedQueryResponse = {
+  query: Query;
+  question: string;
+  summary?: string;
 };
 
 export type PostValidatedQueryRequest = GetValidatedQueryRequest & {

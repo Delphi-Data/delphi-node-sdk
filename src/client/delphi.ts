@@ -10,6 +10,8 @@ import type {
   ErrorResponse,
   GetAnswerRequest,
   GetAnswerResponse,
+  GetValidatedQueryRequest,
+  GetValidatedQueryResponse,
   LightdashQueryRequest,
   LightdashQueryResponse,
   LookerQueryRequest,
@@ -152,5 +154,21 @@ export class DelphiApi {
       request
     );
     this.handleError((response.data as ErrorResponse).error);
+  }
+
+  async getValidatedQuery(
+    request: GetValidatedQueryRequest
+  ): Promise<GetValidatedQueryResponse> {
+    // urlencode the query params
+    const params = new URLSearchParams();
+    params.append('question', request.question);
+    params.append('type', request.type);
+    request.includeSummary &&
+      params.append('includeSummary', `${request.includeSummary}`);
+    const response = await this.client.get<
+      GetValidatedQueryResponse | ErrorResponse
+    >(`/validated-query?${params.toString()}`);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as GetValidatedQueryResponse;
   }
 }
