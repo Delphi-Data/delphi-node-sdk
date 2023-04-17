@@ -156,19 +156,20 @@ export class DelphiApi {
     this.handleError((response.data as ErrorResponse).error);
   }
 
-  async getValidatedQuery(
+  async getValidatedQueries(
     request: GetValidatedQueryRequest
-  ): Promise<GetValidatedQueryResponse> {
+  ): Promise<GetValidatedQueryResponse[]> {
     // urlencode the query params
     const params = new URLSearchParams();
     params.append('question', request.question);
     params.append('type', request.type);
     request.includeSummary &&
       params.append('includeSummary', `${request.includeSummary}`);
+    request.limit && params.append('limit', `${request.limit}`);
     const response = await this.client.get<
-      GetValidatedQueryResponse | ErrorResponse
+      GetValidatedQueryResponse[] | ErrorResponse
     >(`/validated-query?${params.toString()}`);
     this.handleError((response.data as ErrorResponse).error);
-    return response.data as GetValidatedQueryResponse;
+    return response.data as GetValidatedQueryResponse[];
   }
 }

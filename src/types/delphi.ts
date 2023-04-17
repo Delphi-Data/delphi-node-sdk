@@ -153,6 +153,8 @@ export type GetValidatedQueryRequest = {
   question: string;
   type: DataServiceType;
   includeSummary?: boolean;
+  limit?: number;
+  minSimilarity?: number;
 };
 
 export type GetValidatedQueryResponse = {
