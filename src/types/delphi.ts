@@ -162,12 +162,14 @@ export type GetValidatedQueryResponse = {
   validatedAt: string | undefined;
   question: string;
   summary?: string;
+  askedBy?: string;
   validatedBy?: string;
 };
 
 export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
   query: Query;
   validatedBy?: string;
+  askedBy?: string;
 };
 
 export type ErrorResponse = {
