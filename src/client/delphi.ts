@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
+  ClassifyMessageRequest,
+  ClassifyMessageResponse,
   CubeQueryRequest,
   CubeQueryResponse,
   DbtMetricsQueryRequest,
@@ -171,5 +173,15 @@ export class DelphiApi {
     >(`/validated-query?${params.toString()}`);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as GetValidatedQueryResponse[];
+  }
+
+  async classifyMessage(
+    request: ClassifyMessageRequest
+  ): Promise<ClassifyMessageResponse> {
+    const response = await this.client.post<
+      ClassifyMessageResponse | ErrorResponse
+    >('/classify-message', request);
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as ClassifyMessageResponse;
   }
 }

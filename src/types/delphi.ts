@@ -172,6 +172,22 @@ export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
   askedBy?: string;
 };
 
+export type MessageClassification =
+  | 'edit_previous_query'
+  | 'data_pull'
+  | 'metric_pull'
+  | 'general_question'
+  | 'catalog_question'
+  | 'other';
+
+export type ClassifyMessageRequest = {
+  message: string;
+};
+
+export type ClassifyMessageResponse = {
+  classification: MessageClassification;
+};
+
 export type ErrorResponse = {
   error: string;
 };
