@@ -191,6 +191,7 @@ export type ClassifyMessageResponse = {
 export type ChatRequest = {
   message: string;
   conversation?: Conversation[];
+  semanticLayerType?: DataServiceType;
 };
 
 export type ChatResponse = {
