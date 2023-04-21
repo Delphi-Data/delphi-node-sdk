@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
+  ChatRequest,
+  ChatResponse,
   ClassifyMessageRequest,
   ClassifyMessageResponse,
   CubeQueryRequest,
@@ -183,5 +185,14 @@ export class DelphiApi {
     >('/classify-message', request);
     this.handleError((response.data as ErrorResponse).error);
     return response.data as ClassifyMessageResponse;
+  }
+
+  async chat(request: ChatRequest): Promise<ChatResponse> {
+    const response = await this.client.post<ChatResponse | ErrorResponse>(
+      '/chat',
+      request
+    );
+    this.handleError((response.data as ErrorResponse).error);
+    return response.data as ChatResponse;
   }
 }

@@ -188,6 +188,15 @@ export type ClassifyMessageResponse = {
   classification: MessageClassification;
 };
 
+export type ChatRequest = {
+  message: string;
+  conversation?: Conversation[];
+};
+
+export type ChatResponse = {
+  text: string;
+};
+
 export type ErrorResponse = {
   error: string;
 };
