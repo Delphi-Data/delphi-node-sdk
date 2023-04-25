@@ -192,6 +192,11 @@ export type ChatRequest = {
   message: string;
   conversation?: Conversation[];
   semanticLayerType?: DataServiceType;
+  catalog?: {
+    dimensions: Catalog;
+    metrics: Catalog;
+    cubes?: CubeCube[];
+  };
 };
 
 export type ChatResponse = {

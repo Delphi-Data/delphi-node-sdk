@@ -80,4 +80,6 @@ export type LightdashQuery = {
   };
 };
 
-export type LightdashDbtMetric = Record<string, string | string[]>;
+export type LightdashDbtMetric = Record<string, string | string[]> & {
+  name: string;
+};
