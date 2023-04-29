@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
@@ -56,108 +56,102 @@ export class DelphiApi {
     });
   }
 
-  private handleError(error?: ErrorResponse['error']) {
-    if (error) {
-      throw new DelphiError(error);
+  private handleError(error: AxiosError): never {
+    if (error.response?.data) {
+      throw new DelphiError((error.response.data as ErrorResponse).error);
     }
+    throw error;
   }
 
   async generateDbtMetricsQuery(
     request: DbtMetricsQueryRequest
   ): Promise<DbtMetricsQueryResponse> {
-    const response = await this.client.post<
-      DbtMetricsQueryResponse | ErrorResponse
-    >('/dbt-metrics-query', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<DbtMetricsQueryResponse | ErrorResponse>(
+        '/dbt-metrics-query',
+        request
+      )
+      .catch(this.handleError);
     return response.data as DbtMetricsQueryResponse;
   }
 
   async generateLightdashQuery(
     request: LightdashQueryRequest
   ): Promise<LightdashQueryResponse> {
-    const response = await this.client.post<
-      LightdashQueryResponse | ErrorResponse
-    >('/lightdash-query', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<LightdashQueryResponse | ErrorResponse>('/lightdash-query', request)
+      .catch(this.handleError);
     return response.data as LightdashQueryResponse;
   }
 
   async generateLookerQuery(
     request: LookerQueryRequest
   ): Promise<LookerQueryResponse> {
-    const response = await this.client.post<
-      LookerQueryResponse | ErrorResponse
-    >('/looker-query', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<LookerQueryResponse | ErrorResponse>('/looker-query', request)
+      .catch(this.handleError);
     return response.data as LookerQueryResponse;
   }
 
   async generateMetabaseQuery(
     request: MetabaseQueryRequest
   ): Promise<MetabaseQueryResponse> {
-    const response = await this.client.post<
-      MetabaseQueryResponse | ErrorResponse
-    >('/metabase-query', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<MetabaseQueryResponse | ErrorResponse>('/metabase-query', request)
+      .catch(this.handleError);
     return response.data as MetabaseQueryResponse;
   }
 
   async generateCubeQuery(
     request: CubeQueryRequest
   ): Promise<CubeQueryResponse> {
-    const response = await this.client.post<CubeQueryResponse | ErrorResponse>(
-      '/cube-query',
-      request
-    );
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<CubeQueryResponse | ErrorResponse>('/cube-query', request)
+      .catch(this.handleError);
     return response.data as CubeQueryResponse;
   }
 
   async summarizeQuery(
     request: SummarizeQueryRequest
   ): Promise<SummarizeQueryResponse> {
-    const response = await this.client.post<
-      SummarizeQueryResponse | ErrorResponse
-    >('/query-summary', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<SummarizeQueryResponse | ErrorResponse>('/query-summary', request)
+      .catch(this.handleError);
     return response.data as SummarizeQueryResponse;
   }
 
   async refineQuery<T extends Query>(
     request: RefineQueryRequest<T>
   ): Promise<RefineQueryResponse<T>> {
-    const response = await this.client.post<
-      RefineQueryResponse<T> | ErrorResponse
-    >('/refine-query', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<RefineQueryResponse<T> | ErrorResponse>('/refine-query', request)
+      .catch(this.handleError);
     return response.data as RefineQueryResponse<T>;
   }
 
   async answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse> {
-    const response = await this.client.post<GetAnswerResponse | ErrorResponse>(
-      '/answer',
-      request
-    );
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<GetAnswerResponse | ErrorResponse>('/answer', request)
+      .catch(this.handleError);
     return response.data as GetAnswerResponse;
   }
 
   async searchEntities<T extends Document>(
     request: SearchEntitiesRequest<T>
   ): Promise<SearchEntitiesResponse<T>> {
-    const response = await this.client.post<
-      SearchEntitiesResponse<T> | ErrorResponse
-    >('/search-entities', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<SearchEntitiesResponse<T> | ErrorResponse>(
+        '/search-entities',
+        request
+      )
+      .catch(this.handleError);
     return response.data as SearchEntitiesResponse<T>;
   }
 
   async postValidatedQuery(request: PostValidatedQueryRequest): Promise<void> {
-    const response = await this.client.post<void | ErrorResponse>(
-      '/validated-query',
-      request
-    );
-    this.handleError((response.data as ErrorResponse).error);
+    await this.client
+      .post<void | ErrorResponse>('/validated-query', request)
+      .catch(this.handleError);
   }
 
   async getValidatedQueries(
@@ -170,29 +164,30 @@ export class DelphiApi {
     request.includeSummary &&
       params.append('includeSummary', `${request.includeSummary}`);
     request.limit && params.append('limit', `${request.limit}`);
-    const response = await this.client.get<
-      GetValidatedQueryResponse[] | ErrorResponse
-    >(`/validated-query?${params.toString()}`);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .get<GetValidatedQueryResponse[] | ErrorResponse>(
+        `/validated-query?${params.toString()}`
+      )
+      .catch(this.handleError);
     return response.data as GetValidatedQueryResponse[];
   }
 
   async classifyMessage(
     request: ClassifyMessageRequest
   ): Promise<ClassifyMessageResponse> {
-    const response = await this.client.post<
-      ClassifyMessageResponse | ErrorResponse
-    >('/classify-message', request);
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<ClassifyMessageResponse | ErrorResponse>(
+        '/classify-message',
+        request
+      )
+      .catch(this.handleError);
     return response.data as ClassifyMessageResponse;
   }
 
   async chat(request: ChatRequest): Promise<ChatResponse> {
-    const response = await this.client.post<ChatResponse | ErrorResponse>(
-      '/chat',
-      request
-    );
-    this.handleError((response.data as ErrorResponse).error);
+    const response = await this.client
+      .post<ChatResponse | ErrorResponse>('/chat', request)
+      .catch(this.handleError);
     return response.data as ChatResponse;
   }
 }
