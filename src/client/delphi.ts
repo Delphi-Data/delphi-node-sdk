@@ -53,6 +53,8 @@ export class DelphiApi {
         'X-CLIENT-ID': clientId,
         'X-API-KEY': apiKey,
       },
+      timeout: 60000,
+      signal: AbortSignal.timeout(60000),
     });
   }
 
