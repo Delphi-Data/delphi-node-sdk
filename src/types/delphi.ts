@@ -173,6 +173,7 @@ export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
 };
 
 export type MessageClassification =
+  | 'general_question'
   | 'edit_previous_query'
   | 'data_query'
   | 'metric_query'
