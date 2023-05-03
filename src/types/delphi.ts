@@ -174,11 +174,10 @@ export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
 
 export type MessageClassification =
   | 'edit_previous_query'
-  | 'data_pull'
-  | 'metric_pull'
-  | 'general_question'
-  | 'catalog_question'
-  | 'other';
+  | 'data_query'
+  | 'metric_query'
+  | 'question_about_delphi'
+  | 'catalog_question';
 
 export type ClassifyMessageRequest = {
   message: string;
