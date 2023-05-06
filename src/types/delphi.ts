@@ -136,6 +136,10 @@ export interface GetAnswerResponse {
   answer: string;
 }
 
+export interface GetChartResponse {
+  chart: string;
+}
+
 export type Document = {
   name: string;
 };

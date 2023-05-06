@@ -14,6 +14,7 @@ import type {
   ErrorResponse,
   GetAnswerRequest,
   GetAnswerResponse,
+  GetChartResponse,
   GetValidatedQueryRequest,
   GetValidatedQueryResponse,
   LightdashQueryRequest,
@@ -136,6 +137,13 @@ export class DelphiApi {
       .post<GetAnswerResponse | ErrorResponse>('/answer', request)
       .catch(this.handleError);
     return response.data as GetAnswerResponse;
+  }
+
+  async chartFromData(request: GetAnswerRequest): Promise<GetChartResponse> {
+    const response = await this.client
+      .post<GetChartResponse | ErrorResponse>('/chart', request)
+      .catch(this.handleError);
+    return response.data as GetChartResponse;
   }
 
   async searchEntities<T extends Document>(
