@@ -138,6 +138,7 @@ export interface GetAnswerResponse {
 
 export interface GetChartResponse {
   chart: string;
+  url: string;
 }
 
 export type Document = {
