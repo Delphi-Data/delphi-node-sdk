@@ -183,7 +183,8 @@ export type MessageClassification =
   | 'data_query'
   | 'metric_query'
   | 'question_about_delphi'
-  | 'catalog_question';
+  | 'catalog_question'
+  | 'chart_or_graph';
 
 export type ClassifyMessageRequest = {
   message: string;
