@@ -180,7 +180,7 @@ export type PostValidatedQueryRequest = GetValidatedQueryRequest & {
 export type MessageClassification =
   | 'general_question'
   | 'edit_previous_query'
-  | 'data_query'
+  | 'data_pull'
   | 'metric_query'
   | 'question_about_delphi'
   | 'catalog_question'
