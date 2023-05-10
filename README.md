@@ -60,7 +60,7 @@ The [DelphiApi class](https://github.com/Delphi-Data/delphi-node-sdk/blob/main/s
 - `classifyMessage(request: ClassifyMessageRequest): Promise<ClassifyMessageResponse>`
 - `chat(request: ChatRequest): Promise<ChatResponse>`
 
-Please refer to the API documentation for details on the request and response objects of each method.
+Please refer to the [types folder](https://github.com/Delphi-Data/delphi-node-sdk/blob/main/src/types/delphi.ts) for details on the request and response objects of each method.
 
 ## Example
 
