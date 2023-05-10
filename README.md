@@ -15,7 +15,7 @@ npm install delphi-sdk
 First, import the DelphiApi class from the SDK:
 
 ```typescript
-import { DelphiApi } from 'delphi-sdk';
+import { DelphiApi } from 'delphi-node-sdk';
 ```
 
 ### Initializing the API client
