@@ -43,24 +43,121 @@ try {
 
 ### Methods
 
-The [DelphiApi class](https://github.com/Delphi-Data/delphi-node-sdk/blob/main/src/client/delphi.ts#L46) provides the following methods:
-
-- `generateDbtMetricsQuery(request: DbtMetricsQueryRequest): Promise<DbtMetricsQueryResponse>`
-- `generateLightdashQuery(request: LightdashQueryRequest): Promise<LightdashQueryResponse>`
-- `generateLookerQuery(request: LookerQueryRequest): Promise<LookerQueryResponse>`
-- `generateMetabaseQuery(request: MetabaseQueryRequest): Promise<MetabaseQueryResponse>`
-- `generateCubeQuery(request: CubeQueryRequest): Promise<CubeQueryResponse>`
-- `summarizeQuery(request: SummarizeQueryRequest): Promise<SummarizeQueryResponse>`
-- `refineQuery(request: RefineQueryRequest<T>): Promise<RefineQueryResponse<T>>`
-- `answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse>`
-- `chartFromData(request: GetAnswerRequest): Promise<GetChartResponse>`
-- `searchEntities(request: SearchEntitiesRequest<T>): Promise<SearchEntitiesResponse<T>>`
-- `postValidatedQuery(request: PostValidatedQueryRequest): Promise<void>`
-- `getValidatedQueries(request: GetValidatedQueryRequest): Promise<GetValidatedQueryResponse[]>`
-- `classifyMessage(request: ClassifyMessageRequest): Promise<ClassifyMessageResponse>`
-- `chat(request: ChatRequest): Promise<ChatResponse>`
+The [DelphiApi class](https://github.com/Delphi-Data/delphi-node-sdk/blob/main/src/client/delphi.ts#L46) provides the following methods.
 
 Please refer to the [types folder](https://github.com/Delphi-Data/delphi-node-sdk/blob/main/src/types/delphi.ts) for details on the request and response objects of each method.
+
+#### **generateDbtMetricsQuery**
+
+```typescript
+generateDbtMetricsQuery(request: DbtMetricsQueryRequest): Promise<DbtMetricsQueryResponse>
+```
+
+Generates a dbt metrics query based on the provided request.
+
+#### **generateLightdashQuery**
+
+```typescript
+generateLightdashQuery(request: LightdashQueryRequest): Promise<LightdashQueryResponse>
+```
+
+Generates a Lightdash query based on the provided request.
+
+#### **generateLookerQuery**
+
+```typescript
+generateLookerQuery(request: LookerQueryRequest): Promise<LookerQueryResponse>
+```
+
+Generates a Looker query based on the provided request.
+
+#### **generateMetabaseQuery**
+
+```typescript
+generateMetabaseQuery(request: MetabaseQueryRequest): Promise<MetabaseQueryResponse>
+```
+
+Generates a Metabase query based on the provided request.
+
+#### **generateCubeQuery**
+
+```typescript
+generateCubeQuery(request: CubeQueryRequest): Promise<CubeQueryResponse>
+```
+
+Generates a Cube.js query based on the provided request.
+
+#### **summarizeQuery**
+
+```typescript
+summarizeQuery(request: SummarizeQueryRequest): Promise<SummarizeQueryResponse>
+```
+
+Summarizes the given query to provide a human-readable summary.
+
+#### **refineQuery**
+
+```typescript
+refineQuery<T extends Query>(request: RefineQueryRequest<T>): Promise<RefineQueryResponse<T>>
+```
+
+Refines the given query based on the provided request, returning an optimized or more specific query.
+
+#### **answerFromData**
+
+```typescript
+answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse>
+```
+
+Retrieves an answer from the data based on the provided request.
+
+#### **chartFromData**
+
+```typescript
+chartFromData(request: GetAnswerRequest): Promise<GetChartResponse>
+```
+
+Generates a chart from the data based on the provided request.
+
+#### **searchEntities**
+
+```typescript
+searchEntities<T extends Document>(request: SearchEntitiesRequest<T>): Promise<SearchEntitiesResponse<T>>
+```
+
+Searches for entities in the data based on the provided request, returning a list of matching entities.
+
+#### **postValidatedQuery**
+
+```typescript
+postValidatedQuery(request: PostValidatedQueryRequest): Promise<void>
+```
+
+Posts a validated query to the API, storing it for future reference.
+
+#### **getValidatedQueries**
+
+```typescript
+getValidatedQueries(request: GetValidatedQueryRequest): Promise<GetValidatedQueryResponse[]>
+```
+
+Retrieves a list of validated queries based on the provided request.
+
+#### **classifyMessage**
+
+```typescript
+classifyMessage(request: ClassifyMessageRequest): Promise<ClassifyMessageResponse>
+```
+
+Classifies a given message based on the provided request, returning a classification result.
+
+#### **chat**
+
+```typescript
+chat(request: ChatRequest): Promise<ChatResponse>
+```
+
+Sends a chat request to the API and returns a chat response.
 
 ## Example
 
