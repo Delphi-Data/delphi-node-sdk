@@ -17,6 +17,7 @@ import type {
   GetChartResponse,
   GetValidatedQueryRequest,
   GetValidatedQueryResponse,
+  LanguageModel,
   LightdashQueryRequest,
   LightdashQueryResponse,
   LookerQueryRequest,
@@ -41,6 +42,7 @@ type Params = {
   baseURL?: string;
   clientId: string;
   apiKey: string;
+  languageModel?: LanguageModel;
 };
 
 export class DelphiApi {
@@ -53,6 +55,7 @@ export class DelphiApi {
       headers: {
         'X-CLIENT-ID': clientId,
         'X-API-KEY': apiKey,
+        'X-LANGUAGE-MODEL': params.languageModel,
       },
       timeout: 360000,
       signal: AbortSignal.timeout(360000),

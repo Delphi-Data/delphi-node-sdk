@@ -212,3 +212,5 @@ export type ChatResponse = {
 export type ErrorResponse = {
   error: string;
 };
+
+export type LanguageModel = 'gpt-4' | 'claude-v1';
