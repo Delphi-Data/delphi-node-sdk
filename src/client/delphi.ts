@@ -32,6 +32,8 @@ import type {
   SearchEntitiesResponse,
   SummarizeQueryRequest,
   SummarizeQueryResponse,
+  TextToCrontabRequest,
+  TextToCrontabResponse,
 } from '../types/delphi';
 
 export class DelphiError extends Error {
@@ -202,5 +204,14 @@ export class DelphiApi {
       .post<ChatResponse | ErrorResponse>('/chat', request)
       .catch(this.handleError);
     return response.data as ChatResponse;
+  }
+
+  async textToCrontab(
+    request: TextToCrontabRequest
+  ): Promise<TextToCrontabResponse> {
+    const response = await this.client
+      .post<TextToCrontabResponse | ErrorResponse>('/crontab', request)
+      .catch(this.handleError);
+    return response.data as TextToCrontabResponse;
   }
 }

@@ -214,3 +214,11 @@ export type ErrorResponse = {
 };
 
 export type LanguageModel = 'gpt-4' | 'claude-v1';
+
+export type TextToCrontabRequest = {
+  text: string;
+};
+
+export type TextToCrontabResponse = {
+  crontab: string;
+};
