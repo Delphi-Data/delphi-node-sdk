@@ -7,7 +7,7 @@ The Delphi SDK provides an easy-to-use TypeScript interface for interacting with
 To install the Delphi SDK, use the following command:
 
 ```
-npm install delphi-sdk
+npm install delphi-node-sdk
 ```
 
 ## Usage
