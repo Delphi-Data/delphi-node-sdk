@@ -213,7 +213,7 @@ export type ErrorResponse = {
   error: string;
 };
 
-export type LanguageModel = 'gpt-4' | 'claude-v1';
+export type LanguageModel = 'gpt-4' | 'claude-v1' | 'palm-2';
 
 export type TextToCrontabRequest = {
   text: string;
