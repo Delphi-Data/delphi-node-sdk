@@ -12,6 +12,14 @@ export type DataServiceType =
   | 'metabase'
   | 'cubejs';
 
+export type DataServicePrettyType =
+  | 'Mock'
+  | 'dbt Cloud'
+  | 'Lightdash'
+  | 'Looker'
+  | 'Metabase'
+  | 'Cube';
+
 export type Catalog =
   | LightdashField[]
   | DbtMetric[]
