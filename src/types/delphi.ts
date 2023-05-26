@@ -218,7 +218,7 @@ export type ChatResponse = {
 };
 
 export type ErrorResponse = {
-  error: string;
+  message: string;
 };
 
 export type LanguageModel = 'gpt-4' | 'claude-v1' | 'palm-2' | 'starchat';
@@ -229,4 +229,9 @@ export type TextToCrontabRequest = {
 
 export type TextToCrontabResponse = {
   crontab: string;
+};
+
+export type AuthenticateRequest = {
+  clientId: string;
+  apiKey: string;
 };

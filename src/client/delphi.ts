@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
+  AuthenticateRequest,
   ChatRequest,
   ChatResponse,
   ClassifyMessageRequest,
@@ -66,7 +67,7 @@ export class DelphiApi {
 
   private handleError(error: AxiosError): never {
     if (error.response?.data) {
-      throw new DelphiError((error.response.data as ErrorResponse).error);
+      throw new DelphiError((error.response.data as ErrorResponse).message);
     }
     throw error;
   }
@@ -213,5 +214,16 @@ export class DelphiApi {
       .post<TextToCrontabResponse | ErrorResponse>('/crontab', request)
       .catch(this.handleError);
     return response.data as TextToCrontabResponse;
+  }
+
+  async authenticate(request: AuthenticateRequest): Promise<void> {
+    await this.client
+      .post<void | ErrorResponse>('/api/authenticate', undefined, {
+        headers: {
+          'X-CLIENT-ID': request.clientId,
+          'X-API-KEY': request.apiKey,
+        },
+      })
+      .catch(this.handleError);
   }
 }
