@@ -1,3 +1,4 @@
+import { AtScaleCube, AtScaleQuery } from './atscale';
 import { CubeCube, CubeDimension, CubeQuery } from './cube';
 import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
@@ -10,7 +11,8 @@ export type DataServiceType =
   | 'lightdash'
   | 'looker'
   | 'metabase'
-  | 'cubejs';
+  | 'cubejs'
+  | 'atscale';
 
 export type DataServicePrettyType =
   | 'Mock'
@@ -18,7 +20,8 @@ export type DataServicePrettyType =
   | 'Lightdash'
   | 'Looker'
   | 'Metabase'
-  | 'Cube';
+  | 'Cube'
+  | 'AtScale';
 
 export type Catalog =
   | LightdashField[]
@@ -82,7 +85,8 @@ export type Query =
   | DbtQueryWithSQL
   | MetabaseQuery
   | CubeQuery
-  | LookerQuery;
+  | LookerQuery
+  | AtScaleQuery;
 
 export type QueryResponse<T extends Query> = {
   query: T;
@@ -92,6 +96,7 @@ export type QueryResponse<T extends Query> = {
 export type LightdashQueryResponse = QueryResponse<LightdashQuery>;
 export type DbtMetricsQueryResponse = QueryResponse<DbtQueryWithSQL>;
 export type LookerQueryResponse = QueryResponse<LookerQuery>;
+export type AtScaleQueryResponse = QueryResponse<AtScaleQuery>;
 
 export interface MetabaseQueryRequest extends QueryRequest {
   dimensions: MetabaseField[];
@@ -103,6 +108,10 @@ export interface CubeQueryRequest extends QueryRequest {
   cubes: CubeCube[];
 }
 export type CubeQueryResponse = QueryResponse<CubeQuery>;
+
+export interface AtScaleQueryRequest extends QueryRequest {
+  cubes: AtScaleCube[];
+}
 
 export interface RefineQueryRequest<T extends Query> {
   query: T;
@@ -209,7 +218,7 @@ export type ChatRequest = {
   catalog?: {
     dimensions: Catalog;
     metrics: Catalog;
-    cubes?: CubeCube[];
+    cubes?: CubeCube[] | AtScaleCube[];
   };
 };
 

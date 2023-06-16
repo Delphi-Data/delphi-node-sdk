@@ -2,6 +2,8 @@ import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
+  AtScaleQueryRequest,
+  AtScaleQueryResponse,
   AuthenticateRequest,
   ChatRequest,
   ChatResponse,
@@ -118,6 +120,15 @@ export class DelphiApi {
       .post<CubeQueryResponse | ErrorResponse>('/cube-query', request)
       .catch(this.handleError);
     return response.data as CubeQueryResponse;
+  }
+
+  async generateAtScaleQuery(
+    request: AtScaleQueryRequest
+  ): Promise<AtScaleQueryResponse> {
+    const response = await this.client
+      .post<AtScaleQueryResponse | ErrorResponse>('/atscale-query', request)
+      .catch(this.handleError);
+    return response.data as AtScaleQueryResponse;
   }
 
   async summarizeQuery(
