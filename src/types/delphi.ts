@@ -199,8 +199,8 @@ export type MessageClassification =
   | 'edit_previous_query'
   | 'data_pull'
   | 'metric_query'
-  | 'question_about_delphi'
-  | 'catalog_question'
+  | 'data_query'
+  | 'question_about_available_data_in_catalog'
   | 'chart_or_graph';
 
 export type ClassifyMessageRequest = {
@@ -230,7 +230,12 @@ export type ErrorResponse = {
   message: string;
 };
 
-export type LanguageModel = 'gpt-4' | 'claude-v1' | 'palm-2' | 'starchat';
+export type LanguageModel =
+  | 'gpt-4'
+  | 'claude-v1'
+  | 'palm-2'
+  | 'delphi'
+  | 'gpt-3.5-turbo';
 
 export type TextToCrontabRequest = {
   text: string;
