@@ -200,7 +200,7 @@ export type MessageClassification =
   | 'data_pull'
   | 'metric_query'
   | 'data_query'
-  | 'question_about_available_data_in_catalog'
+  | 'question_about_catalog'
   | 'chart_or_graph';
 
 export type ClassifyMessageRequest = {
