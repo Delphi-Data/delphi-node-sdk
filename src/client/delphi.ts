@@ -28,6 +28,7 @@ import type {
   MetabaseQueryRequest,
   MetabaseQueryResponse,
   PostValidatedQueryRequest,
+  ProfileDimensionsRequest,
   Query,
   RefineQueryRequest,
   RefineQueryResponse,
@@ -225,6 +226,12 @@ export class DelphiApi {
       .post<TextToCrontabResponse | ErrorResponse>('/crontab', request)
       .catch(this.handleError);
     return response.data as TextToCrontabResponse;
+  }
+
+  async profileDimensions(request: ProfileDimensionsRequest): Promise<void> {
+    await this.client
+      .post<void | ErrorResponse>('/profile-dimensions', request)
+      .catch(this.handleError);
   }
 
   async authenticate(request: AuthenticateRequest): Promise<void> {

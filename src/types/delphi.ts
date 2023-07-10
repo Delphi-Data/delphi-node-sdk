@@ -226,6 +226,16 @@ export type ChatResponse = {
   text: string;
 };
 
+export type SavedDimension = {
+  name: string;
+  values: string[];
+};
+
+export type ProfileDimensionsRequest = {
+  dimensions: SavedDimension[];
+  connectionType: DataServiceType;
+};
+
 export type ErrorResponse = {
   message: string;
 };
