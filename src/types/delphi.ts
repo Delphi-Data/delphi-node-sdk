@@ -78,6 +78,7 @@ export interface GetAnswerRequest {
   data: QueryResult;
   conversation?: Conversation[];
   query?: string | LightdashQuery;
+  currency?: string;
 }
 
 export type Query =
