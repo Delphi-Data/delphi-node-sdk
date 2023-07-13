@@ -5,3 +5,4 @@ export * from './delphi';
 export * from './lightdash';
 export * from './looker';
 export * from './metabase';
+export * from './propel';

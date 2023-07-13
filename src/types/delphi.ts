@@ -4,6 +4,7 @@ import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
+import { PropelMetric, PropelQuery } from './propel';
 
 export type DataServiceType =
   | 'mock'
@@ -12,7 +13,8 @@ export type DataServiceType =
   | 'looker'
   | 'metabase'
   | 'cubejs'
-  | 'atscale';
+  | 'atscale'
+  | 'propel';
 
 export type DataServicePrettyType =
   | 'Mock'
@@ -21,7 +23,8 @@ export type DataServicePrettyType =
   | 'Looker'
   | 'Metabase'
   | 'Cube'
-  | 'AtScale';
+  | 'AtScale'
+  | 'Propel';
 
 export type Catalog =
   | LightdashField[]
@@ -87,7 +90,8 @@ export type Query =
   | MetabaseQuery
   | CubeQuery
   | LookerQuery
-  | AtScaleQuery;
+  | AtScaleQuery
+  | PropelQuery;
 
 export type QueryResponse<T extends Query> = {
   query: T;
@@ -98,6 +102,7 @@ export type LightdashQueryResponse = QueryResponse<LightdashQuery>;
 export type DbtMetricsQueryResponse = QueryResponse<DbtQueryWithSQL>;
 export type LookerQueryResponse = QueryResponse<LookerQuery>;
 export type AtScaleQueryResponse = QueryResponse<AtScaleQuery>;
+export type PropelQueryResponse = QueryResponse<PropelQuery>;
 
 export interface MetabaseQueryRequest extends QueryRequest {
   dimensions: MetabaseField[];
@@ -114,6 +119,10 @@ export interface AtScaleQueryRequest extends QueryRequest {
   cubes: AtScaleCube[];
 }
 
+export interface PropelQueryRequest extends QueryRequest {
+  metrics: PropelMetric[];
+}
+
 export interface RefineQueryRequest<T extends Query> {
   query: T;
   message: string;
@@ -124,7 +133,8 @@ export interface RefineQueryRequest<T extends Query> {
     | DbtMetric[]
     | LightdashDbtMetric[]
     | MetabaseField[]
-    | LookerField[];
+    | LookerField[]
+    | PropelMetric[];
   cubes?: CubeCube[];
   includeSummary?: boolean;
   type?: DataServiceType;
@@ -138,6 +148,10 @@ export interface RefineQueryResponse<T extends Query> {
     ? LightdashQuery
     : T extends CubeQuery
     ? CubeQuery
+    : T extends LookerQuery
+    ? LookerQuery
+    : T extends AtScaleQuery
+    ? AtScaleQuery
     : MetabaseQuery;
 }
 
