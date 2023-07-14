@@ -29,6 +29,8 @@ import type {
   MetabaseQueryResponse,
   PostValidatedQueryRequest,
   ProfileDimensionsRequest,
+  PropelQueryRequest,
+  PropelQueryResponse,
   Query,
   RefineQueryRequest,
   RefineQueryResponse,
@@ -130,6 +132,15 @@ export class DelphiApi {
       .post<AtScaleQueryResponse | ErrorResponse>('/atscale-query', request)
       .catch(this.handleError);
     return response.data as AtScaleQueryResponse;
+  }
+
+  async generatePropelQuery(
+    request: PropelQueryRequest
+  ): Promise<PropelQueryResponse> {
+    const response = await this.client
+      .post<PropelQueryResponse | ErrorResponse>('/propel-query', request)
+      .catch(this.handleError);
+    return response.data as PropelQueryResponse;
   }
 
   async summarizeQuery(
