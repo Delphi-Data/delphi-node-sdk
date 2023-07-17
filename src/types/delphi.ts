@@ -80,7 +80,7 @@ export interface GetAnswerRequest {
   question: string;
   data: QueryResult;
   conversation?: Conversation[];
-  query?: string | LightdashQuery;
+  query?: Query | string;
   currency?: string;
 }
 
