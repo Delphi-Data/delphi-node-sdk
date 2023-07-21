@@ -1,22 +1,31 @@
 import { AtScaleCube, AtScaleQuery } from './atscale';
 import { CubeCube, CubeDimension, CubeQuery } from './cube';
-import { DbtMetric, DbtQuery, DbtQueryWithSQL } from './dbt';
+import { DbtMetric, DbtQueryWithSQL } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
 import { PropelMetric, PropelQuery } from './propel';
 
-export type DataServiceType =
-  | 'mock'
-  | 'dbt_cloud'
+export type DelphiApiResponse<T extends unknown> =
+  | {
+      status: 'ok';
+      result: T;
+    }
+  | {
+      status: 'error';
+      error: string;
+    };
+
+export type ConnectionType =
+  | 'atScale'
+  | 'cube'
+  | 'dbtCloud'
   | 'lightdash'
   | 'looker'
   | 'metabase'
-  | 'cubejs'
-  | 'atscale'
   | 'propel';
 
-export type DataServicePrettyType =
+export type ConnectionPrettyType =
   | 'Mock'
   | 'dbt Cloud'
   | 'Lightdash'
@@ -35,6 +44,20 @@ export type Catalog =
   | LookerField[];
 
 export type CatalogItem = Catalog[0];
+
+export type BIEntityType = 'saved_query' | 'dashboard';
+
+export type BIEntity = {
+  type: BIEntityType;
+  name: string;
+  description?: string;
+  id: string;
+  url: string;
+  author?: string;
+  imageUrl: string;
+  updatedAt?: string;
+  views?: number;
+};
 
 export type LightdashField = {
   name: string;
@@ -135,24 +158,15 @@ export interface RefineQueryRequest<T extends Query> {
     | MetabaseField[]
     | LookerField[]
     | PropelMetric[];
-  cubes?: CubeCube[];
+  cubes?: AtScaleCube[] | CubeCube[];
   includeSummary?: boolean;
-  type?: DataServiceType;
+  type?: ConnectionType;
   conversation?: Conversation[];
 }
 
 export interface RefineQueryResponse<T extends Query> {
-  query: T extends DbtQuery
-    ? DbtMetricsQueryResponse
-    : T extends LightdashQuery
-    ? LightdashQuery
-    : T extends CubeQuery
-    ? CubeQuery
-    : T extends LookerQuery
-    ? LookerQuery
-    : T extends AtScaleQuery
-    ? AtScaleQuery
-    : MetabaseQuery;
+  query: T;
+  summary?: string;
 }
 
 export interface SummarizeQueryRequest {
@@ -188,7 +202,7 @@ export type SearchEntitiesResponse<T extends Document> = {
 
 export type GetValidatedQueryRequest = {
   question: string;
-  type: DataServiceType;
+  type: ConnectionType;
   includeSummary?: boolean;
   limit?: number;
   minSimilarity?: number;
@@ -229,7 +243,7 @@ export type ClassifyMessageResponse = {
 export type ChatRequest = {
   message: string;
   conversation?: Conversation[];
-  semanticLayerType?: DataServiceType;
+  semanticLayerType?: ConnectionType;
   catalog?: {
     dimensions: Catalog;
     metrics: Catalog;
@@ -248,7 +262,7 @@ export type SavedDimension = {
 
 export type ProfileDimensionsRequest = {
   dimensions: SavedDimension[];
-  connectionType: DataServiceType;
+  connectionType: ConnectionType;
 };
 
 export type ErrorResponse = {
