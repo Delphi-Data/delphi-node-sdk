@@ -71,8 +71,8 @@ export class DelphiApi {
   }
 
   private handleError(error: AxiosError): never {
-    if (error.response?.data) {
-      throw new DelphiError((error.response.data as ErrorResponse).message);
+    if ((error.response?.data as ErrorResponse)?.message) {
+      throw new DelphiError((error.response?.data as ErrorResponse).message);
     }
     throw error;
   }
