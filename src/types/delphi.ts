@@ -117,7 +117,9 @@ export type Query =
   | PropelQuery;
 
 export type QueryResponse<T extends Query> = {
-  query: T;
+  query:
+    | (T & { status: 'ok' })
+    | { status: 'clarification_needed'; message: string };
   summary?: string;
 };
 
