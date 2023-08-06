@@ -166,11 +166,6 @@ export interface RefineQueryRequest<T extends Query> {
   conversation?: Conversation[];
 }
 
-export interface RefineQueryResponse<T extends Query> {
-  query: T;
-  summary?: string;
-}
-
 export interface SummarizeQueryRequest {
   query: Query;
   question?: string;

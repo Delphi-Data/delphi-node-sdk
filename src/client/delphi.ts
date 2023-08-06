@@ -32,8 +32,8 @@ import type {
   PropelQueryRequest,
   PropelQueryResponse,
   Query,
+  QueryResponse,
   RefineQueryRequest,
-  RefineQueryResponse,
   SearchEntitiesRequest,
   SearchEntitiesResponse,
   SummarizeQueryRequest,
@@ -154,11 +154,11 @@ export class DelphiApi {
 
   async refineQuery<T extends Query>(
     request: RefineQueryRequest<T>
-  ): Promise<RefineQueryResponse<T>> {
+  ): Promise<QueryResponse<T>> {
     const response = await this.client
-      .post<RefineQueryResponse<T> | ErrorResponse>('/refine-query', request)
+      .post<QueryResponse<T> | ErrorResponse>('/refine-query', request)
       .catch(this.handleError);
-    return response.data as RefineQueryResponse<T>;
+    return response.data as QueryResponse<T>;
   }
 
   async answerFromData(request: GetAnswerRequest): Promise<GetAnswerResponse> {
