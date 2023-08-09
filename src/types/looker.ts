@@ -68,6 +68,7 @@ export type LookerField = Pick<
   explore: {
     name: string;
     label: string | null | undefined;
+    description: string | null | undefined;
   };
   model: {
     name: string;
