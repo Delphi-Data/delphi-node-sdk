@@ -63,8 +63,10 @@ export type LookerFieldRaw = {
 
 export type LookerField = Pick<
   LookerFieldRaw,
-  'name' | 'label' | 'description' | 'view' | 'view_label'
+  'name' | 'label' | 'description' | 'view' | 'view_label' | 'tags'
 > & {
+  id: string;
+  usagePct?: number;
   explore: {
     name: string;
     label: string | null | undefined;
