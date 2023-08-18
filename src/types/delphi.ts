@@ -81,6 +81,7 @@ type QueryRequest = {
   question: string;
   conversation?: Conversation[];
   includeSummary?: boolean;
+  notes?: string[];
 };
 
 export interface DbtMetricsQueryRequest extends QueryRequest {
