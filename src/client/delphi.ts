@@ -9,6 +9,8 @@ import type {
   ChatResponse,
   ClassifyMessageRequest,
   ClassifyMessageResponse,
+  CoordinatorRequest,
+  CoordinatorResponse,
   CubeQueryRequest,
   CubeQueryResponse,
   DbtMetricsQueryRequest,
@@ -243,6 +245,13 @@ export class DelphiApi {
     await this.client
       .post<void | ErrorResponse>('/profile-dimensions', request)
       .catch(this.handleError);
+  }
+
+  async coordinate(request: CoordinatorRequest): Promise<CoordinatorResponse> {
+    const response = await this.client
+      .post<CoordinatorResponse | ErrorResponse>('/coordinate', request)
+      .catch(this.handleError);
+    return response.data as CoordinatorResponse;
   }
 
   async authenticate(request: AuthenticateRequest): Promise<void> {

@@ -74,7 +74,7 @@ export type QueryResult = Record<
 
 export type Conversation = {
   text: string;
-  author: 'delphi' | 'user';
+  author: 'delphi' | 'user' | 'function';
 };
 
 type QueryRequest = {
@@ -285,4 +285,36 @@ export type TextToCrontabResponse = {
 export type AuthenticateRequest = {
   clientId: string;
   apiKey: string;
+};
+
+export enum COORDINATOR_FUNCTIONS {
+  SEARCH = 'searchDataCatalog',
+  QUERY_PLAN = 'generateQueryPlan',
+  RUN_QUERY = 'runQuery',
+  ANSWER_QUESTION = 'answerQuestion',
+  GENERATE_CHART = 'generateChart',
+}
+
+export type CoordinatorRequest = {
+  message: string;
+  conversation?: Conversation[];
+  catalog?: {
+    dimensions: Catalog;
+    metrics: Catalog;
+    cubes?: CubeCube[] | AtScaleCube[];
+  };
+};
+
+export type CoordinatorResponse = {
+  type: 'catalog' | 'query' | 'answer' | 'chart' | 'message' | 'error';
+  response: string;
+  catalog?: {
+    dimensions: Catalog;
+    metrics: Catalog;
+    cubes?: CubeCube[] | AtScaleCube[];
+  };
+  query?: Query;
+  answer?: string;
+  chart?: string;
+  conversation: Conversation[];
 };
