@@ -165,6 +165,7 @@ export interface RefineQueryRequest<T extends Query> {
   includeSummary?: boolean;
   type?: ConnectionType;
   conversation?: Conversation[];
+  notes?: string[];
 }
 
 export interface SummarizeQueryRequest {
