@@ -289,8 +289,9 @@ export type AuthenticateRequest = {
 };
 
 export enum COORDINATOR_FUNCTIONS {
-  SEARCH = 'searchDataCatalog',
-  QUERY_PLAN = 'generateQueryPlan',
+  SEARCH_CATALOG = 'searchCatalog',
+  INTERMEDIATE_QUERY = 'generateIntermediateQuery',
+  QUERY_PLAN = 'generateQuery',
   RUN_QUERY = 'runQuery',
   ANSWER_QUESTION = 'answerQuestion',
   GENERATE_CHART = 'generateChart',
@@ -304,6 +305,7 @@ export type CoordinatorRequest = {
     metrics: Catalog;
     cubes?: CubeCube[] | AtScaleCube[];
   };
+  connectionType: ConnectionType;
 };
 
 export type CoordinatorResponse = {
