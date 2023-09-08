@@ -293,6 +293,7 @@ export enum COORDINATOR_FUNCTIONS {
   INTERMEDIATE_QUERY = 'generateIntermediateQuery',
   QUERY_PLAN = 'generateQuery',
   RUN_QUERY = 'runQuery',
+  SQL_QUERY = 'runSqlQuery',
   ANSWER_QUESTION = 'answerQuestion',
   GENERATE_CHART = 'generateChart',
 }
@@ -309,7 +310,7 @@ export type CoordinatorRequest = {
 };
 
 export type CoordinatorResponse = {
-  type: 'catalog' | 'query' | 'answer' | 'chart' | 'message' | 'error';
+  type: 'catalog' | 'query' | 'answer' | 'chart' | 'message' | 'sql' | 'error';
   response: string;
   catalog?: {
     dimensions: Catalog;
@@ -319,5 +320,6 @@ export type CoordinatorResponse = {
   query?: Query;
   answer?: string;
   chart?: string;
+  sql?: string;
   conversation: Conversation[];
 };
