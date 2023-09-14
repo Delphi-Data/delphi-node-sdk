@@ -290,9 +290,7 @@ export type AuthenticateRequest = {
 
 export enum COORDINATOR_FUNCTIONS {
   SEARCH_CATALOG = 'searchCatalog',
-  INTERMEDIATE_QUERY = 'generateIntermediateQuery',
-  QUERY_PLAN = 'generateQuery',
-  RUN_QUERY = 'runQuery',
+  GET_DATA = 'getData',
   SQL_QUERY = 'runSqlQuery',
   ANSWER_QUESTION = 'answerQuestion',
   GENERATE_CHART = 'generateChart',
@@ -321,5 +319,6 @@ export type CoordinatorResponse = {
   answer?: string;
   chart?: string;
   sql?: string;
+  name?: string;
   conversation: Conversation[];
 };
