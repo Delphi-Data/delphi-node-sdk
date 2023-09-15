@@ -289,6 +289,7 @@ export type AuthenticateRequest = {
 };
 
 export enum COORDINATOR_FUNCTIONS {
+  PLAN = 'registerPlan',
   SEARCH_CATALOG = 'searchCatalog',
   GET_DATA = 'getData',
   SQL_QUERY = 'runSqlQuery',
@@ -309,7 +310,15 @@ export type CoordinatorRequest = {
 };
 
 export type CoordinatorResponse = {
-  type: 'catalog' | 'query' | 'answer' | 'chart' | 'message' | 'sql' | 'error';
+  type:
+    | 'plan'
+    | 'catalog'
+    | 'query'
+    | 'answer'
+    | 'chart'
+    | 'message'
+    | 'sql'
+    | 'error';
   response: string;
   catalog?: {
     dimensions: Catalog;
@@ -317,6 +326,7 @@ export type CoordinatorResponse = {
     cubes?: CubeCube[] | AtScaleCube[];
   };
   query?: Query;
+  plan?: string;
   answer?: string;
   chart?: string;
   sql?: string;
