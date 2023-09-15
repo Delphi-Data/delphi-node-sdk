@@ -305,6 +305,7 @@ export type CoordinatorRequest = {
     cubes?: CubeCube[] | AtScaleCube[];
   };
   connectionType: ConnectionType;
+  currency?: string;
 };
 
 export type CoordinatorResponse = {
