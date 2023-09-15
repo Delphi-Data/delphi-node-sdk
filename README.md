@@ -195,4 +195,5 @@ Make sure to replace 'your-client-id' and 'your-api-key' with your actual creden
 2. `yarn build`
 3. `yarn link`
 4. (In the projects you are using this, such as the Delphi Frontend or Slack App) `yarn link delphi-node-sdk`
-5. Bump the version number in `package.json` before pushing changes.
+5. After making any changes here, run `yarn build` again so that your applications get your changes
+6. Bump the version number in `package.json` before pushing changes.
