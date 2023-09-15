@@ -188,3 +188,11 @@ generateQuery();
 ```
 
 Make sure to replace 'your-client-id' and 'your-api-key' with your actual credentials, and fill in the request object with the required data.
+
+## Development
+
+1. `yarn`
+2. `yarn build`
+3. `yarn link`
+4. (In the projects you are using this, such as the Delphi Frontend or Slack App) `yarn link delphi-node-sdk`
+5. Bump the version number in `package.json` before pushing changes.
