@@ -295,6 +295,7 @@ export enum COORDINATOR_FUNCTIONS {
   SQL_QUERY = 'runSqlQuery',
   ANSWER_QUESTION = 'answerQuestion',
   GENERATE_CHART = 'generateChart',
+  MESSAGE_USER = 'messageUser',
 }
 
 export type CoordinatorRequest = {
