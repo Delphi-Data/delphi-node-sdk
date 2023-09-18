@@ -292,6 +292,7 @@ export enum COORDINATOR_FUNCTIONS {
   PLAN = 'registerPlan',
   SEARCH_CATALOG = 'searchCatalog',
   GET_DATA = 'getData',
+  EDIT_QUERY = 'editQuery',
   SQL_QUERY = 'runSqlQuery',
   ANSWER_QUESTION = 'answerQuestion',
   GENERATE_CHART = 'generateChart',
