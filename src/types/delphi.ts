@@ -119,7 +119,7 @@ export type Query =
 
 export type QueryResponse<T extends Query> = {
   query:
-    | (T & { status: 'ok' })
+    | (T & { status?: 'ok' })
     | { status: 'clarification_needed'; message: string };
   summary?: string;
 };
