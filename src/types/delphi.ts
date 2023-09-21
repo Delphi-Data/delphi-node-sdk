@@ -85,7 +85,7 @@ type QueryRequest = {
 };
 
 export interface DbtMetricsQueryRequest extends QueryRequest {
-  metrics?: DbtMetric[];
+  metrics: DbtMetric[];
 }
 
 export interface LightdashQueryRequest extends QueryRequest {
