@@ -1,22 +1,21 @@
 export type DbtQuery = {
-  metric: string;
-  dimensions?: string[];
-  timeGrain?: string;
-  startDate?: string;
-  endDate?: string;
+  metrics: string[];
+  groupBy: string[];
+  limit?: number;
+  startTime?: string;
+  endTime?: string;
   where?: string;
+  order?: string;
 };
 
 export type DbtMetric = {
-  uniqueId?: string | undefined;
   name: string;
-  dimensions: string[];
-  description: string;
-  timeGrains: string[];
-  label: string;
-};
-
-export type DbtQueryWithSQL = {
-  dbtMetricsQuery: string;
-  dbtMetricObject: DbtQuery;
+  description: string | null;
+  type: string;
+  queryableGranularities: string[];
+  dimensions: {
+    name: string;
+    description: string | null;
+    type: string;
+  }[];
 };
