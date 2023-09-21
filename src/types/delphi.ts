@@ -1,6 +1,6 @@
 import { AtScaleCube, AtScaleQuery } from './atscale';
 import { CubeCube, CubeDimension, CubeQuery } from './cube';
-import { DbtMetric, DbtQueryWithSQL } from './dbt';
+import { DbtMetric, DbtQuery } from './dbt';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
@@ -85,9 +85,7 @@ type QueryRequest = {
 };
 
 export interface DbtMetricsQueryRequest extends QueryRequest {
-  jobId?: string;
-  serviceToken?: string;
-  metrics?: Record<string, string | string[]>[];
+  metrics: DbtMetric[];
 }
 
 export interface LightdashQueryRequest extends QueryRequest {
@@ -110,7 +108,7 @@ export interface GetAnswerRequest {
 
 export type Query =
   | LightdashQuery
-  | DbtQueryWithSQL
+  | DbtQuery
   | MetabaseQuery
   | CubeQuery
   | LookerQuery
@@ -125,7 +123,7 @@ export type QueryResponse<T extends Query> = {
 };
 
 export type LightdashQueryResponse = QueryResponse<LightdashQuery>;
-export type DbtMetricsQueryResponse = QueryResponse<DbtQueryWithSQL>;
+export type DbtMetricsQueryResponse = QueryResponse<DbtQuery>;
 export type LookerQueryResponse = QueryResponse<LookerQuery>;
 export type AtScaleQueryResponse = QueryResponse<AtScaleQuery>;
 export type PropelQueryResponse = QueryResponse<PropelQuery>;
