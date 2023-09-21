@@ -326,6 +326,7 @@ export type CoordinatorResponse = {
     cubes?: CubeCube[] | AtScaleCube[];
   };
   query?: Query;
+  error?: string;
   plan?: string;
   answer?: string;
   chart?: string;
