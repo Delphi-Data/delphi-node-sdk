@@ -5,7 +5,12 @@ export type DbtQuery = {
   where?: {
     sql: string;
   };
-  orderBy?: string;
+  orderBy?: {
+    metric: {
+      name: string;
+    };
+    descending: boolean;
+  };
 };
 
 export type DbtMetric = {
