@@ -1,11 +1,11 @@
 export type DbtQuery = {
-  metrics: string[];
-  groupBy: string[];
+  metrics: { name: string }[];
+  groupBy: { name: string; grain?: string }[];
   limit?: number;
-  startTime?: string;
-  endTime?: string;
-  where?: string;
-  order?: string;
+  where?: {
+    sql: string;
+  };
+  orderBy?: string;
 };
 
 export type DbtMetric = {
