@@ -6,8 +6,12 @@ export type DbtQuery = {
     sql: string;
   };
   orderBy?: {
-    metric: {
+    metric?: {
       name: string;
+    };
+    groupBy?: {
+      name: string;
+      grain?: string;
     };
     descending: boolean;
   };
