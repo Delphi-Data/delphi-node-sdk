@@ -293,7 +293,7 @@ export enum COORDINATOR_FUNCTIONS {
   EDIT_QUERY = 'editQuery',
   SQL_QUERY = 'runSqlQuery',
   ANSWER_QUESTION = 'answerQuestion',
-  GENERATE_CHART = 'generateChart',
+  DISPLAY_CHART = 'displayChart',
   MESSAGE_USER = 'messageUser',
 }
 
@@ -329,7 +329,7 @@ export type CoordinatorResponse = {
   notes?: string[];
   plan?: string;
   answer?: string;
-  chart?: string;
+  chart?: Record<string, unknown>;
   sql?: string;
   name?: string;
   conversation: Conversation[];
