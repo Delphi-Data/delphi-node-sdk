@@ -1,6 +1,6 @@
 export type DbtQuery = {
   metrics: { name: string }[];
-  groupBy: { name: string; grain?: string }[];
+  groupBy?: { name: string; grain?: string }[];
   limit?: number;
   where?: {
     sql: string;
