@@ -1,14 +1,11 @@
-export type AtScaleDimension = {
+type AtScaleField = {
   name: string;
-  caption?: string;
+  type: string;
   description?: string;
 };
 
-export type AtScaleMeasure = {
-  name: string;
-  caption?: string;
-  description?: string;
-};
+export type AtScaleMeasure = AtScaleField;
+export type AtScaleDimension = AtScaleField;
 
 export type AtScaleCube = {
   name: string;
@@ -18,6 +15,5 @@ export type AtScaleCube = {
 };
 
 export type AtScaleQuery = {
-  mdx: string;
-  cube: string;
+  sql: string;
 };
