@@ -307,6 +307,7 @@ export type CoordinatorRequest = {
   };
   connectionType: ConnectionType;
   currency?: string;
+  notes?: string[];
 };
 
 export type CoordinatorResponse = {
