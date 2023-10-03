@@ -315,6 +315,7 @@ export type CoordinatorResponse = {
     | 'plan'
     | 'catalog'
     | 'query'
+    | 'edit'
     | 'answer'
     | 'chart'
     | 'message'
