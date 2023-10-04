@@ -266,6 +266,7 @@ export type AuthenticateRequest = {
 export enum COORDINATOR_FUNCTIONS {
   PLAN = 'registerPlan',
   SEARCH_CATALOG = 'searchCatalog',
+  SEARCH_VALUES = 'searchValues',
   GET_DATA = 'getData',
   EDIT_QUERY = 'editQuery',
   SQL_QUERY = 'runSqlQuery',
@@ -291,6 +292,7 @@ export type CoordinatorResponse = {
   type:
     | 'plan'
     | 'catalog'
+    | 'values'
     | 'query'
     | 'edit'
     | 'answer'
@@ -307,6 +309,8 @@ export type CoordinatorResponse = {
   query?: Query;
   table?: string;
   fields?: string[];
+  field?: string;
+  values?: string[];
   plan?: string;
   answer?: string;
   chart?: Record<string, unknown>;
