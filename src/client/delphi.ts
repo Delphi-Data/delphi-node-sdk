@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosInstance } from 'axios';
 
 import { BASE_URL } from '../constants/url';
 import type {
-  AtScaleQueryRequest,
   AtScaleQueryResponse,
   AuthenticateRequest,
   ChatRequest,
@@ -11,9 +10,7 @@ import type {
   ClassifyMessageResponse,
   CoordinatorRequest,
   CoordinatorResponse,
-  CubeQueryRequest,
   CubeQueryResponse,
-  DbtMetricsQueryRequest,
   DbtMetricsQueryResponse,
   Document,
   ErrorResponse,
@@ -23,17 +20,15 @@ import type {
   GetValidatedQueryRequest,
   GetValidatedQueryResponse,
   LanguageModel,
-  LightdashQueryRequest,
   LightdashQueryResponse,
-  LookerQueryRequest,
   LookerQueryResponse,
   MetabaseQueryRequest,
   MetabaseQueryResponse,
   PostValidatedQueryRequest,
   ProfileDimensionsRequest,
-  PropelQueryRequest,
   PropelQueryResponse,
   Query,
+  QueryRequest,
   QueryResponse,
   RefineQueryRequest,
   SearchEntitiesRequest,
@@ -80,7 +75,7 @@ export class DelphiApi {
   }
 
   async generateDbtMetricsQuery(
-    request: DbtMetricsQueryRequest
+    request: QueryRequest
   ): Promise<DbtMetricsQueryResponse> {
     const response = await this.client
       .post<DbtMetricsQueryResponse | ErrorResponse>(
@@ -92,7 +87,7 @@ export class DelphiApi {
   }
 
   async generateLightdashQuery(
-    request: LightdashQueryRequest
+    request: QueryRequest
   ): Promise<LightdashQueryResponse> {
     const response = await this.client
       .post<LightdashQueryResponse | ErrorResponse>('/lightdash-query', request)
@@ -101,7 +96,7 @@ export class DelphiApi {
   }
 
   async generateLookerQuery(
-    request: LookerQueryRequest
+    request: QueryRequest
   ): Promise<LookerQueryResponse> {
     const response = await this.client
       .post<LookerQueryResponse | ErrorResponse>('/looker-query', request)
@@ -118,9 +113,7 @@ export class DelphiApi {
     return response.data as MetabaseQueryResponse;
   }
 
-  async generateCubeQuery(
-    request: CubeQueryRequest
-  ): Promise<CubeQueryResponse> {
+  async generateCubeQuery(request: QueryRequest): Promise<CubeQueryResponse> {
     const response = await this.client
       .post<CubeQueryResponse | ErrorResponse>('/cube-query', request)
       .catch(this.handleError);
@@ -128,7 +121,7 @@ export class DelphiApi {
   }
 
   async generateAtScaleQuery(
-    request: AtScaleQueryRequest
+    request: QueryRequest
   ): Promise<AtScaleQueryResponse> {
     const response = await this.client
       .post<AtScaleQueryResponse | ErrorResponse>('/atscale-query', request)
@@ -137,7 +130,7 @@ export class DelphiApi {
   }
 
   async generatePropelQuery(
-    request: PropelQueryRequest
+    request: QueryRequest
   ): Promise<PropelQueryResponse> {
     const response = await this.client
       .post<PropelQueryResponse | ErrorResponse>('/propel-query', request)
@@ -252,6 +245,13 @@ export class DelphiApi {
       .post<CoordinatorResponse | ErrorResponse>('/coordinate', request)
       .catch(this.handleError);
     return response.data as CoordinatorResponse;
+  }
+
+  async filterFields(request: ChatRequest): Promise<ChatRequest['catalog']> {
+    const response = await this.client
+      .post<ChatRequest['catalog'] | ErrorResponse>('/filter-fields', request)
+      .catch(this.handleError);
+    return response.data as ChatRequest['catalog'];
   }
 
   async authenticate(request: AuthenticateRequest): Promise<void> {
