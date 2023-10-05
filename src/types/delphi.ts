@@ -309,8 +309,8 @@ export type CoordinatorResponse = {
   query?: Query;
   table?: string;
   fields?: string[];
-  field?: string;
   values?: string[];
+  filters?: Record<string, string>;
   plan?: string;
   answer?: string;
   chart?: Record<string, unknown>;
