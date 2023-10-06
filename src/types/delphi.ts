@@ -306,6 +306,7 @@ export type CoordinatorResponse = {
     metrics: Catalog;
     cubes?: CubeCube[] | AtScaleCube[];
   };
+  question?: string;
   query?: Query;
   table?: string;
   fields?: string[];
