@@ -77,26 +77,14 @@ export type Conversation = {
   author: 'delphi' | 'user' | 'function';
 };
 
-type QueryRequest = {
+export type QueryRequest = {
   question: string;
+  table?: string;
+  fields: string[];
   conversation?: Conversation[];
   includeSummary?: boolean;
   notes?: string[];
 };
-
-export interface DbtMetricsQueryRequest extends QueryRequest {
-  metrics: DbtMetric[];
-}
-
-export interface LightdashQueryRequest extends QueryRequest {
-  dimensions: LightdashField[];
-  metrics: LightdashField[];
-}
-
-export interface LookerQueryRequest extends QueryRequest {
-  dimensions: LookerField[];
-  metrics: LookerField[];
-}
 
 export interface GetAnswerRequest {
   question: string;
@@ -134,18 +122,7 @@ export interface MetabaseQueryRequest extends QueryRequest {
 }
 export type MetabaseQueryResponse = QueryResponse<MetabaseQuery>;
 
-export interface CubeQueryRequest extends QueryRequest {
-  cubes: CubeCube[];
-}
 export type CubeQueryResponse = QueryResponse<CubeQuery>;
-
-export interface AtScaleQueryRequest extends QueryRequest {
-  cubes: AtScaleCube[];
-}
-
-export interface PropelQueryRequest extends QueryRequest {
-  metrics: PropelMetric[];
-}
 
 export interface RefineQueryRequest<T extends Query> {
   query: T;
@@ -289,6 +266,7 @@ export type AuthenticateRequest = {
 export enum COORDINATOR_FUNCTIONS {
   PLAN = 'registerPlan',
   SEARCH_CATALOG = 'searchCatalog',
+  SEARCH_VALUES = 'searchValues',
   GET_DATA = 'getData',
   EDIT_QUERY = 'editQuery',
   SQL_QUERY = 'runSqlQuery',
@@ -314,6 +292,7 @@ export type CoordinatorResponse = {
   type:
     | 'plan'
     | 'catalog'
+    | 'values'
     | 'query'
     | 'edit'
     | 'answer'
@@ -327,8 +306,12 @@ export type CoordinatorResponse = {
     metrics: Catalog;
     cubes?: CubeCube[] | AtScaleCube[];
   };
+  question?: string;
   query?: Query;
-  notes?: string[];
+  table?: string;
+  fields?: string[];
+  values?: string[];
+  filters?: Record<string, string>;
   plan?: string;
   answer?: string;
   chart?: Record<string, unknown>;
