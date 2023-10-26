@@ -248,7 +248,9 @@ export type LanguageModel =
   | 'claude-v1'
   | 'palm-2'
   | 'delphi'
-  | 'gpt-3.5-turbo';
+  | 'gpt-3.5-turbo'
+  | 'delphi-coordinator'
+  | 'delphi-query';
 
 export type TextToCrontabRequest = {
   text: string;
@@ -311,7 +313,7 @@ export type CoordinatorResponse = {
   table?: string;
   fields?: string[];
   values?: string[];
-  filters?: Record<string, string>;
+  filters?: string[];
   plan?: string;
   answer?: string;
   chart?: Record<string, unknown>;
