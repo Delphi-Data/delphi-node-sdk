@@ -245,6 +245,7 @@ export type ErrorResponse = {
 
 export type LanguageModel =
   | 'gpt-4'
+  | 'azure-gpt-4'
   | 'claude-v1'
   | 'palm-2'
   | 'delphi'
