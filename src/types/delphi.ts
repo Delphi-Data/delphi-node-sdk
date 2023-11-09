@@ -289,6 +289,10 @@ export type CoordinatorRequest = {
   connectionType: ConnectionType;
   currency?: string;
   notes?: string[];
+  colors?: {
+    primary?: string;
+    secondary?: string;
+  };
 };
 
 export type CoordinatorResponse = {
