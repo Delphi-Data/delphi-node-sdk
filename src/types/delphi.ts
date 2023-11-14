@@ -92,6 +92,7 @@ export interface GetAnswerRequest {
   conversation?: Conversation[];
   query?: Query | string;
   currency?: string;
+  notes?: string[];
 }
 
 export type Query =
