@@ -86,6 +86,10 @@ export type QueryRequest = {
   notes?: string[];
 };
 
+export type CubeQueryRequest = QueryRequest & {
+  cubes?: CubeCube[];
+};
+
 export interface GetAnswerRequest {
   question: string;
   data: QueryResult;

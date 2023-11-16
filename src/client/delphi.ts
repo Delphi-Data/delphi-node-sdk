@@ -10,6 +10,7 @@ import type {
   ClassifyMessageResponse,
   CoordinatorRequest,
   CoordinatorResponse,
+  CubeQueryRequest,
   CubeQueryResponse,
   DbtMetricsQueryResponse,
   Document,
@@ -113,7 +114,9 @@ export class DelphiApi {
     return response.data as MetabaseQueryResponse;
   }
 
-  async generateCubeQuery(request: QueryRequest): Promise<CubeQueryResponse> {
+  async generateCubeQuery(
+    request: CubeQueryRequest
+  ): Promise<CubeQueryResponse> {
     const response = await this.client
       .post<CubeQueryResponse | ErrorResponse>('/cube-query', request)
       .catch(this.handleError);
