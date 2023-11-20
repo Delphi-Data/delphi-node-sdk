@@ -250,6 +250,7 @@ export type ErrorResponse = {
 
 export type LanguageModel =
   | 'gpt-4'
+  | 'gpt-4-turbo'
   | 'azure-gpt-4'
   | 'claude-v1'
   | 'palm-2'
