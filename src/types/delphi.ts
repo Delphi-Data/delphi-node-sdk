@@ -274,6 +274,7 @@ export type AuthenticateRequest = {
 
 export enum COORDINATOR_FUNCTIONS {
   PLAN = 'registerPlan',
+  SEARCH_DASHBOARDS = 'searchDashboards',
   SEARCH_CATALOG = 'searchCatalog',
   SEARCH_VALUES = 'searchValues',
   GET_DATA = 'getData',
@@ -304,6 +305,7 @@ export type CoordinatorRequest = {
 export type CoordinatorResponse = {
   type:
     | 'plan'
+    | 'searchDashboards'
     | 'catalog'
     | 'values'
     | 'query'
