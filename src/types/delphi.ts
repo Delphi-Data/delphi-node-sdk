@@ -1,6 +1,7 @@
 import { AtScaleCube, AtScaleQuery } from './atscale';
 import { CubeCube, CubeDimension, CubeQuery } from './cube';
 import { DbtMetric, DbtQuery } from './dbt';
+import { GA4Query } from './ga4';
 import { LightdashDbtMetric, LightdashQuery } from './lightdash';
 import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
@@ -20,6 +21,7 @@ export type ConnectionType =
   | 'atScale'
   | 'cube'
   | 'dbtCloud'
+  | 'ga4'
   | 'lightdash'
   | 'looker'
   | 'metabase'
@@ -28,6 +30,7 @@ export type ConnectionType =
 export type ConnectionPrettyType =
   | 'Mock'
   | 'dbt Cloud'
+  | 'Google Analytics'
   | 'Lightdash'
   | 'Looker'
   | 'Metabase'
@@ -128,6 +131,8 @@ export interface MetabaseQueryRequest extends QueryRequest {
 export type MetabaseQueryResponse = QueryResponse<MetabaseQuery>;
 
 export type CubeQueryResponse = QueryResponse<CubeQuery>;
+
+export type GA4QueryResponse = QueryResponse<GA4Query>;
 
 export interface RefineQueryRequest<T extends Query> {
   query: T;

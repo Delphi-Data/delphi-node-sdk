@@ -15,6 +15,7 @@ import type {
   DbtMetricsQueryResponse,
   Document,
   ErrorResponse,
+  GA4QueryResponse,
   GetAnswerRequest,
   GetAnswerResponse,
   GetChartResponse,
@@ -139,6 +140,13 @@ export class DelphiApi {
       .post<PropelQueryResponse | ErrorResponse>('/propel-query', request)
       .catch(this.handleError);
     return response.data as PropelQueryResponse;
+  }
+
+  async generateGA4Query(request: QueryRequest): Promise<GA4QueryResponse> {
+    const response = await this.client
+      .post<GA4QueryResponse | ErrorResponse>('/ga4-query', request)
+      .catch(this.handleError);
+    return response.data as GA4QueryResponse;
   }
 
   async summarizeQuery(
