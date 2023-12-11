@@ -15,11 +15,11 @@ type DimensionExpression = {
 };
 
 type LowerCase = {
-  sourceProperty?: string;
+  dimensionName?: string;
 };
 
 type UpperCase = {
-  sourceProperty?: string;
+  dimensionName?: string;
 };
 
 type Concatenate = {
@@ -49,11 +49,6 @@ type Extract = {
 
 type Metric = {
   name: string;
-  expression?: MetricExpression;
-};
-
-type MetricExpression = {
-  concatenate?: Concatenate;
   expression?: string;
 };
 
@@ -65,10 +60,12 @@ type DateRange = {
 type FilterExpression = {
   andGroup?: FilterGroup;
   orGroup?: FilterGroup;
+  notExpression?: FilterExpression;
+  filter?: Filter;
 };
 
 type FilterGroup = {
-  filters?: Filter[];
+  expressions: FilterExpression[];
 };
 
 type Filter = {
@@ -77,32 +74,31 @@ type Filter = {
   inListFilter?: InListFilter;
   numericFilter?: NumericFilter;
   betweenFilter?: BetweenFilter;
-  nullFilter?: NullFilter;
-  notFilter?: FilterExpression;
 };
 
 type StringFilter = {
   value?: string;
   caseSensitive?: boolean;
-  matchType?: MatchType;
+  matchType?: MatchType | keyof typeof MatchType;
 };
 
 type InListFilter = {
   values?: string[];
 };
 
+type NumberValue = {
+  int64Value?: number | string | null;
+  doubleValue?: number | null;
+};
+
 type NumericFilter = {
-  operation?: NumericFilterOperation;
-  value?: number;
+  operation?: keyof typeof NumericFilterOperation;
+  value?: NumberValue;
 };
 
 type BetweenFilter = {
-  fromValue?: number;
-  toValue?: number;
-};
-
-type NullFilter = {
-  operator?: NullFilterOperator;
+  fromValue?: NumberValue;
+  toValue?: NumberValue;
 };
 
 type OrderBy = {
@@ -120,42 +116,31 @@ type MetricOrderBy = {
   orderType?: OrderType;
 };
 
-// type Pivot = {
-//   fieldNames?: string[];
-//   limit?: number;
-//   metricAggregations?: MetricAggregation[];
-//   orderBys?: OrderBy[];
-// };
-
-type MetricAggregation = {
-  name?: string;
-  expression?: string;
-};
+enum MetricAggregation {
+  METRIC_AGGREGATION_UNSPECIFIED = 0,
+  TOTAL = 1,
+  MINIMUM = 5,
+  MAXIMUM = 6,
+  COUNT = 4,
+}
 
 enum MatchType {
-  MATCH_TYPE_UNSPECIFIED = 'MATCH_TYPE_UNSPECIFIED',
-  EXACT = 'EXACT',
-  CONTAINS = 'CONTAINS',
-  BEGINS_WITH = 'BEGINS_WITH',
-  ENDS_WITH = 'ENDS_WITH',
-  PARTIAL = 'PARTIAL',
-  REGEXP = 'REGEXP',
-  WILDCARD = 'WILDCARD',
+  MATCH_TYPE_UNSPECIFIED = 0,
+  EXACT = 1,
+  BEGINS_WITH = 2,
+  ENDS_WITH = 3,
+  CONTAINS = 4,
+  FULL_REGEXP = 5,
+  PARTIAL_REGEXP = 6,
 }
 
 enum NumericFilterOperation {
-  OPERATOR_UNSPECIFIED = 'OPERATOR_UNSPECIFIED',
-  EQUAL = 'EQUAL',
-  LESS_THAN = 'LESS_THAN',
-  LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL',
-  GREATER_THAN = 'GREATER_THAN',
-  GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL',
-}
-
-enum NullFilterOperator {
-  NULL_OPERATOR_UNSPECIFIED = 'NULL_OPERATOR_UNSPECIFIED',
-  IS_NULL = 'IS_NULL',
-  IS_NOT_NULL = 'IS_NOT_NULL',
+  OPERATION_UNSPECIFIED = 0,
+  EQUAL = 1,
+  LESS_THAN = 2,
+  LESS_THAN_OR_EQUAL = 3,
+  GREATER_THAN = 4,
+  GREATER_THAN_OR_EQUAL = 5,
 }
 
 enum OrderType {
@@ -177,20 +162,6 @@ type Report = {
   metricAggregations?: MetricAggregation[];
   orderBys?: OrderBy[];
 };
-
-// type PivotReport = {
-//   type: 'PIVOT';
-//   dimensions: Dimension[];
-//   metrics: Metric[];
-//   dateRanges: DateRange[];
-//   dimensionFilter?: FilterExpression;
-//   metricFilter?: FilterExpression;
-//   offset?: number;
-//   limit?: number;
-//   metricAggregations?: MetricAggregation[];
-//   orderBys?: OrderBy[];
-//   pivots: Pivot[];
-// };
 
 type RealtimeReport = {
   type: 'REALTIME';
