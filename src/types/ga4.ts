@@ -1,4 +1,4 @@
-export type GA4Query = Report | PivotReport | RealtimeReport;
+export type GA4Query = Report | RealtimeReport;
 
 type Dimension = {
   name: string;
@@ -120,12 +120,12 @@ type MetricOrderBy = {
   orderType?: OrderType;
 };
 
-type Pivot = {
-  fieldNames?: string[];
-  limit?: number;
-  metricAggregations?: MetricAggregation[];
-  orderBys?: OrderBy[];
-};
+// type Pivot = {
+//   fieldNames?: string[];
+//   limit?: number;
+//   metricAggregations?: MetricAggregation[];
+//   orderBys?: OrderBy[];
+// };
 
 type MetricAggregation = {
   name?: string;
@@ -178,19 +178,19 @@ type Report = {
   orderBys?: OrderBy[];
 };
 
-type PivotReport = {
-  type: 'PIVOT';
-  dimensions: Dimension[];
-  metrics: Metric[];
-  dateRanges: DateRange[];
-  dimensionFilter?: FilterExpression;
-  metricFilter?: FilterExpression;
-  offset?: number;
-  limit?: number;
-  metricAggregations?: MetricAggregation[];
-  orderBys?: OrderBy[];
-  pivots: Pivot[];
-};
+// type PivotReport = {
+//   type: 'PIVOT';
+//   dimensions: Dimension[];
+//   metrics: Metric[];
+//   dateRanges: DateRange[];
+//   dimensionFilter?: FilterExpression;
+//   metricFilter?: FilterExpression;
+//   offset?: number;
+//   limit?: number;
+//   metricAggregations?: MetricAggregation[];
+//   orderBys?: OrderBy[];
+//   pivots: Pivot[];
+// };
 
 type RealtimeReport = {
   type: 'REALTIME';
