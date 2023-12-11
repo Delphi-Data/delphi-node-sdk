@@ -233,6 +233,7 @@ export type ChatRequest = {
     metrics: Catalog;
     cubes?: CubeCube[] | AtScaleCube[];
   };
+  fields?: string[];
 };
 
 export type ChatResponse = {
