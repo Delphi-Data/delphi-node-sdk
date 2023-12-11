@@ -1,3 +1,10 @@
+export type GA4Field = {
+  name: string;
+  description?: string;
+  label?: string;
+  category?: string;
+};
+
 export type GA4Query = Report | RealtimeReport;
 
 type Dimension = {
