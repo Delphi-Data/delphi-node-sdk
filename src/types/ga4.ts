@@ -108,6 +108,23 @@ type BetweenFilter = {
   toValue?: NumberValue;
 };
 
+type CohortSpec = {
+  cohorts?: Cohort[];
+  cohortsRange?: CohortsRange;
+};
+
+type Cohort = {
+  name?: string;
+  dimension?: string;
+  dateRange?: DateRange;
+};
+
+type CohortsRange = {
+  granularity?: 'GRANULARITY_UNSPECIFIED' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
+  startOffset?: number;
+  endOffset?: number;
+};
+
 type OrderBy = {
   dimension?: DimensionOrderBy;
   metric?: MetricOrderBy;
@@ -157,19 +174,22 @@ enum OrderType {
   NUMERIC = 'NUMERIC',
 }
 
+// Run a report. A report returns your data in a tabular format. You can specify how to organize your data by dimensions and metrics.
 type Report = {
   type?: 'REPORT';
   dimensions: Dimension[];
   metrics: Metric[];
-  dateRanges: DateRange[];
+  dateRanges?: DateRange[]; // Use dateRanges to filter on dates if needed. NEVER use dimensionFilter or metricFilter to filter on dates.
   dimensionFilter?: FilterExpression;
   metricFilter?: FilterExpression;
+  cohortSpec?: CohortSpec;
   offset?: number;
   limit?: number;
   metricAggregations?: MetricAggregation[];
   orderBys?: OrderBy[];
 };
 
+// Use realtime reports to get data for the last 30 minutes. You can't filter on dates, so only use realtime reports if the user is looking for real-time data such as the number of active users on your site right now.
 type RealtimeReport = {
   type: 'REALTIME';
   dimensions: Dimension[];
