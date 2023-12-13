@@ -1,8 +1,12 @@
 import { AtScaleCube, AtScaleQuery } from './atscale';
 import { CubeCube, CubeDimension, CubeQuery } from './cube';
 import { DbtMetric, DbtQuery } from './dbt';
-import { GA4Query } from './ga4';
-import { LightdashDbtMetric, LightdashQuery } from './lightdash';
+import { GA4Field, GA4Query } from './ga4';
+import {
+  LightdashDbtMetric,
+  LightdashField,
+  LightdashQuery,
+} from './lightdash';
 import { LookerField, LookerQuery } from './looker';
 import { MetabaseField, MetabaseQuery } from './metabase';
 import { PropelMetric, PropelQuery } from './propel';
@@ -44,7 +48,8 @@ export type Catalog =
   | LightdashDbtMetric[]
   | MetabaseField[]
   | CubeDimension[]
-  | LookerField[];
+  | LookerField[]
+  | GA4Field[];
 
 export type CatalogItem = Catalog[0];
 
@@ -60,14 +65,6 @@ export type BIEntity = {
   imageUrl: string;
   updatedAt?: string;
   views?: number;
-};
-
-export type LightdashField = {
-  name: string;
-  label?: string;
-  description?: string;
-  explore: string;
-  table: string;
 };
 
 export type QueryResult = Record<

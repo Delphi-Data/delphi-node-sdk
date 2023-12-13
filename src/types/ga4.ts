@@ -126,6 +126,7 @@ type CohortsRange = {
 };
 
 type OrderBy = {
+  desc?: boolean;
   dimension?: DimensionOrderBy;
   metric?: MetricOrderBy;
 };

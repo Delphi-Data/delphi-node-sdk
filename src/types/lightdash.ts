@@ -83,3 +83,22 @@ export type LightdashQuery = {
 export type LightdashDbtMetric = Record<string, string | string[]> & {
   name: string;
 };
+
+export type LightdashFieldRaw = {
+  name: string;
+  label?: string;
+  description?: string;
+  explore: string;
+  table: string;
+};
+
+export type LightdashField = {
+  name: string;
+  label?: string;
+  description?: string;
+  explore: {
+    name: string;
+    label?: string;
+    description?: string;
+  };
+};
