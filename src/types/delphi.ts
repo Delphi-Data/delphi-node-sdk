@@ -259,6 +259,7 @@ export type LanguageModel =
   | 'palm-2'
   | 'delphi'
   | 'gpt-3.5-turbo'
+  | 'mistral'
   | 'delphi-coordinator'
   | 'delphi-query';
 
