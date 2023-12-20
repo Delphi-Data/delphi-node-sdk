@@ -333,7 +333,13 @@ export type CoordinatorResponse = {
   filters?: string[];
   plan?: string;
   answer?: string;
-  chart?: Record<string, unknown>;
+  chart?: {
+    dataName: string;
+    type: 'area' | 'bar' | 'bar_list' | 'donut' | 'line' | 'table';
+    measures: string[];
+    dimension?: string;
+    pivot?: string;
+  };
   sql?: string;
   name?: string;
   conversation: Conversation[];
