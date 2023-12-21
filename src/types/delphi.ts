@@ -339,6 +339,7 @@ export type CoordinatorResponse = {
     measures: string[];
     dimension?: string;
     pivot?: string;
+    stacked?: boolean;
   };
   sql?: string;
   name?: string;
