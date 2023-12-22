@@ -6,6 +6,7 @@ export type CubeQuery = Query & Record<string, unknown>;
 export type CubeDimension = {
   name: string;
   title: string;
+  description?: string;
   type: string;
   shortTitle: string;
   isVisible?: boolean;
@@ -25,6 +26,7 @@ export type CubeMeasure = CubeDimension & {
 export type CubeCube = {
   name: string;
   title: string;
+  description?: string;
   measures: CubeMeasure[];
   dimensions: CubeDimension[];
 };
