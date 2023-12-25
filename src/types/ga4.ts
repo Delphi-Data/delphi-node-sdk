@@ -64,15 +64,15 @@ type DateRange = {
   endDate: string;
 };
 
-type FilterExpression = {
+export type GA4FilterExpression = {
   andGroup?: FilterGroup;
   orGroup?: FilterGroup;
-  notExpression?: FilterExpression;
+  notExpression?: GA4FilterExpression;
   filter?: Filter;
 };
 
 type FilterGroup = {
-  expressions: FilterExpression[];
+  expressions: GA4FilterExpression[];
 };
 
 type Filter = {
@@ -181,8 +181,8 @@ type Report = {
   dimensions: Dimension[];
   metrics: Metric[];
   dateRanges?: DateRange[]; // Use dateRanges to filter on dates if needed. NEVER use dimensionFilter or metricFilter to filter on dates.
-  dimensionFilter?: FilterExpression;
-  metricFilter?: FilterExpression;
+  dimensionFilter?: GA4FilterExpression;
+  metricFilter?: GA4FilterExpression;
   cohortSpec?: CohortSpec;
   offset?: number;
   limit?: number;
@@ -195,8 +195,8 @@ type RealtimeReport = {
   type: 'REALTIME';
   dimensions: Dimension[];
   metrics: Metric[];
-  dimensionFilter?: FilterExpression;
-  metricFilter?: FilterExpression;
+  dimensionFilter?: GA4FilterExpression;
+  metricFilter?: GA4FilterExpression;
   limit?: number;
   metricAggregations?: MetricAggregation[];
   orderBys?: OrderBy[];
