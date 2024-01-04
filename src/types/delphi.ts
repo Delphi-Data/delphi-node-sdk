@@ -281,6 +281,7 @@ export enum COORDINATOR_FUNCTIONS {
   SEARCH_DASHBOARDS = 'searchDashboards',
   SEARCH_CATALOG = 'searchCatalog',
   SEARCH_VALUES = 'searchValues',
+  SEARCH_COMPATIBLE_FIELDS = 'searchCompatibleFields',
   GET_DATA = 'getData',
   EDIT_QUERY = 'editQuery',
   SQL_QUERY = 'runSqlQuery',
@@ -310,6 +311,7 @@ export type CoordinatorResponse = {
   type:
     | 'plan'
     | 'searchDashboards'
+    | 'searchCompatibleFields'
     | 'catalog'
     | 'values'
     | 'query'
@@ -328,6 +330,7 @@ export type CoordinatorResponse = {
   question?: string;
   query?: Query;
   table?: string;
+  field?: string;
   fields?: string[];
   values?: string[];
   filters?: string[];
