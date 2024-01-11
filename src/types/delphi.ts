@@ -305,6 +305,7 @@ export type CoordinatorRequest = {
     primary?: string;
     secondary?: string;
   };
+  dataKeys?: string[];
 };
 
 export type CoordinatorResponse = {
@@ -342,6 +343,7 @@ export type CoordinatorResponse = {
     measures: string[];
     dimension?: string;
     pivot?: string;
+    dimensions?: string[];
     stacked?: boolean;
   };
   sql?: string;
