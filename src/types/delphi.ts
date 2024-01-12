@@ -346,6 +346,8 @@ export type CoordinatorResponse = {
     dimensions?: string[];
     stacked?: boolean;
   };
+  chartType?: 'area' | 'bar' | 'bar_list' | 'donut' | 'line' | 'table';
+
   sql?: string;
   name?: string;
   conversation: Conversation[];
