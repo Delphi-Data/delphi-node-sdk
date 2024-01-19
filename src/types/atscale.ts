@@ -15,5 +15,6 @@ export type AtScaleCube = {
 };
 
 export type AtScaleQuery = {
-  sql: string;
+  mdx: string;
+  cube: string;
 };
